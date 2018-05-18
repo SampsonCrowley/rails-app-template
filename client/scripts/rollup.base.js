@@ -35,6 +35,9 @@ export const createConfig = ({ includeDepencies }) => ({
     name,
     globals,
   },
+  watch: {
+    clearScreen: false
+  },
   plugins: [
     postcss({
       modules: true

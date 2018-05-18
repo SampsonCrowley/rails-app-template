@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+export $(cat .env | xargs)
+
+# if [[ -z $QUEUE_RUNNER_HOSTNAME ]] || [[ $QUEUE_RUNNER_HOSTNAME == $(hostname) ]] ; then
+# 	export PROCFILE=Procfile
+# else
+# 	export PROCFILE=ProcfileRailsOnly
+# fi
+export PROCFILE=ProcfileRailsOnly
+
+# echo $PROCFILE
+forego start

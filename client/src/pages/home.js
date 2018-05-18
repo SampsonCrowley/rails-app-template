@@ -1,16 +1,9 @@
 import m from "mithril";
 import CSS from "../styles";
 
-export const link = {
-  path: "/",
-  module: Home,
-  name: "Home Page",
-  allowed: true
-};
-
-export default class Home {
+export class Home {
   view() {
-    m(CSS.page, [
+    return m(CSS.page, [
       m('.cf.pa2', [
         m('.fl.w-100.w-50-ns.ph2', [
           m('a[href="#"].pv2.grow.db.no-underline.black', [
@@ -84,5 +77,13 @@ export default class Home {
       ])
     ]);
   }
-
 }
+
+const link = {
+  path: "/",
+  module: Home,
+  title: "Home Page",
+  allowed: true
+};
+
+export default link;

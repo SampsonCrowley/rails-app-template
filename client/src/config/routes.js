@@ -5,6 +5,7 @@ export default class Routes {
   constructor() {
     this._routes = {
     };
+    this._routeList = [];
   }
 
   register({
@@ -13,9 +14,16 @@ export default class Routes {
     title =  "DefaultAppName",
   }) {
     if(!module) return false;
+
+    if(this._routes[path]) this._routeList.splice(this._routeList.findIndex(r => r.path === path), 1);
+
     this._routes[path] = {
-      render: () => m(Layout, {title}, m(module))
+      render: () => m(Layout, {title, links: this._routeList}, m(module)),
+      title,
+      path
     };
+
+    this._routeList.push(this._routes[path]);
     return true;
   }
 

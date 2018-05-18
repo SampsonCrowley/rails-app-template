@@ -1,0 +1,2 @@
+node: yarn --cwd client dev
+rails: bundle exec rails s -p 3000

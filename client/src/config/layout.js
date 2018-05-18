@@ -1,15 +1,17 @@
+import m from 'mithril';
 import Components from "../components";
 
 const {Body, Header} = Components;
 
 export default class Layout {
-  view({attrs, children}) {
-    console.log({attrs, children});
+  view(props) {
+    console.log(props);
+    const {attrs, children} = props;
     return m(
       'main', [
-        m(Header, {links: links, ...attrs}),
+        m(Header, {...attrs}),
       ],
       m(Body, children)
     );
   }
-};
+}

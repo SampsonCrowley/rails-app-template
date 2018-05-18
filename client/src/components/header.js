@@ -1,9 +1,8 @@
 import m from "mithril";
 import CSS from "../styles";
 
-const Header = {
-  view: ({ attrs: { title, links = [] }, ...attrs }) => {
-    console.log(title, links, attrs);
+export default class Header {
+  view({attrs: {links, title}}) {
     return m(CSS.header.main, [
       m(CSS.header.cover, [
         m(CSS.header.content, [
@@ -22,7 +21,7 @@ const Header = {
                   m(CSS.header.menuLink, {
                     href: link.path,
                     oncreate: m.route.link
-                  }, link.name)
+                  }, link.title)
                 )
               )
             )
@@ -34,6 +33,4 @@ const Header = {
       ])
     ]);
   }
-};
-
-export default Header;
+}

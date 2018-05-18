@@ -1,11 +1,22 @@
 {
   "presets": [
-    ["env", { "modules": false }]
+    [
+      "env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": [
+            "> 0.25%",
+            "not dead"
+          ]
+        }
+      }
+    ]
   ],
   "plugins": [
     "external-helpers",
     "transform-object-assign",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
   ],
   "env": {
     "test": {
