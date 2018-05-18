@@ -1,0 +1,24 @@
+{
+  "presets": [
+    ["env", { "modules": false }]
+  ],
+  "plugins": [
+    "external-helpers",
+    "transform-object-assign",
+    "transform-object-rest-spread"
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "env"
+      ],
+      "plugins": ["transform-runtime"]
+    },
+    "production": {
+      "presets": [
+        ["env", { "modules": false }],
+        ["minify"]
+      ],
+    }
+  }
+}
