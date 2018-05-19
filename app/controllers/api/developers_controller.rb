@@ -1,4 +1,4 @@
-class DevelopersController < ApplicationController
+class API::DevelopersController < ApplicationController
   before_action :set_developer, only: [:show, :update, :destroy]
 
   # GET /developers
@@ -18,7 +18,7 @@ class DevelopersController < ApplicationController
     @developer = Developer.new(developer_params)
 
     if @developer.save
-      render json: @developer, status: :created, location: @developer
+      render json: @developer, status: :created, location: api_developer_url(@developer)
     else
       render json: @developer.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class DevelopersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def developer_params
-      params.require(:developer).permit(:first, :middle, :last, :suffix, :dob, :email)
+      params.require(:developer).permit(:email, :first, :middle, :last, :suffix, :dob)
     end
 end

@@ -12,6 +12,6 @@ dev = Developer.create!(email: 'sampsonsprojects@gmail.com', first: 'Sampson', m
   dev.tasks << Task.new(
     title: "Some Task #{i}",
     description: "do some BS task",
-    due: 10.days.from_now
+    due_date: 10.days.from_now
   )
 end

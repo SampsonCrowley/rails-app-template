@@ -2,6 +2,13 @@ class Task < ApplicationRecord
   # == Constants ============================================================
 
   # == Attributes ===========================================================
+  #           :id => :integer,
+  #        :title => :string,
+  #  :description => :string,
+  #          :due_date => :date,
+  # :developer_id => :integer,
+  #   :created_at => :datetime,
+  #   :updated_at => :datetime
 
   # == Extensions ===========================================================
 
@@ -9,6 +16,9 @@ class Task < ApplicationRecord
   belongs_to :developer, inverse_of: :tasks
 
   # == Validations ==========================================================
+  validates :title, presence: true, length: { minimum: 5 }
+
+  validate :future_due_date, if: :due_date_changed?
 
   # == Scopes ===============================================================
 
@@ -17,5 +27,10 @@ class Task < ApplicationRecord
   # == Class Methods ========================================================
 
   # == Instance Methods =====================================================
-
+  def future_due_date
+    return true if due_date.blank?
+    if due_date < Date.tomorrow
+      errors.add(:due_date, 'due_date Date cannot be in the past')
+    end
+  end
 end

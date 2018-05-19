@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :developer do
-    first "MyText"
-    middle "MyText"
-    last "MyText"
-    suffix "MyText"
-    dob "2018-05-18"
-    email ""
+    email "sample@email.address"
+    first "MyString"
+    middle "MyString"
+    last "MyString"
+    suffix "MyString"
+    dob "2018-05-19"
   end
 end
