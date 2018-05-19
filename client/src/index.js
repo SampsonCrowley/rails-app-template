@@ -1,10 +1,7 @@
-import m from "mithril";
-import Pages from './pages';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import Site from './layouts/site';
+import HomePage from './pages/home';
 
-import {routes} from './config';
-
-m.route.prefix("#");
-
-const mountNode = document.querySelector("#app-body");
-Pages(routes);
-m.route(mountNode, "/", routes.list());
+ReactDOM.render(<Site><HomePage /></Site>, document.getElementById('root'));

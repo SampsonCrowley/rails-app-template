@@ -1,8 +1,0 @@
-{
-  "name": "DefaultAppName",
-  "description": "Base Mithril App Structure",
-  "repository": "https://github.com/SampsonCrowley/default_app_name",
-  "logo": "https://scontent.fsnc1-1.fna.fbcdn.net/v/t1.15752-9/32475308_2062429047119176_8848996904646737920_n.png?_nc_cat=0&oh=becfdfe8ace601f1ef066b1a016c5f2c&oe=5B9812EA",
-  "keywords": ["node", "heroku", "mithril"],
-  "image": "heroku/nodejs"
-}
