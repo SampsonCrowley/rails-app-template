@@ -21,6 +21,7 @@ class Developer < ApplicationRecord
   validates :first, :last, presence: true, length: { minimum: 2 }
 
   validates_presence_of :dob
+  validate :older_than_12, if: :dob_changed?
 
   validates :email, presence: true,
                     format: { with: /\A[^@;\/\\]+\@[^@;\/\\]+\.[^@;\.\/\\]+\z/ },
@@ -34,4 +35,10 @@ class Developer < ApplicationRecord
 
   # == Instance Methods =====================================================
 
+  private
+    def older_than_12
+      if dob > 13.years.ago.to_date
+        errors.add(:dob, 'You must be at least 13 years old to use this app')
+      end
+    end
 end

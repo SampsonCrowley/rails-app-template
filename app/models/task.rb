@@ -5,7 +5,7 @@ class Task < ApplicationRecord
   #           :id => :integer,
   #        :title => :string,
   #  :description => :string,
-  #          :due_date => :date,
+  #     :due_date => :date,
   # :developer_id => :integer,
   #   :created_at => :datetime,
   #   :updated_at => :datetime
@@ -29,8 +29,8 @@ class Task < ApplicationRecord
   # == Instance Methods =====================================================
   def future_due_date
     return true if due_date.blank?
-    if due_date < Date.tomorrow
-      errors.add(:due_date, 'due_date Date cannot be in the past')
+    if due_date < Date.today
+      errors.add(:due_date, 'cannot be in the past')
     end
   end
 end
