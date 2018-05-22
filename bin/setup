@@ -34,6 +34,18 @@ chdir APP_ROOT do
         File.open(file, 'w') {|f| f << txt}
       end
     end
+    Dir.glob("#{APP_ROOT}/{config,test,mithril,config/initializers}/*.base").each do |file|
+      new_file = file.to_s.sub('.base', '')
+      unless File.exist?(new_file)
+        unless File.directory?(file)
+          txt = File.read(file)
+          txt = txt.gsub(/DefaultAppName/, nm).gsub(/default_app_name/, nm.underscore)
+          File.open(new_file, 'w') {|f| f << txt}
+        else
+          File.rename(file, new_file)
+        end
+      end
+    end
   end
 
   puts '== Installing dependencies =='
