@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import logo from 'assets/images/logo.svg';
+import Header from 'components/header';
 import './site.css';
 
 class Site extends Component {
@@ -10,10 +10,7 @@ class Site extends Component {
   render() {
     return (
       <section className="Site">
-        <header className="Site-header">
-          <img src={logo} className="Site-logo" alt="logo" />
-          <h1 className="Site-title">Welcome to React</h1>
-        </header>
+        <Header />
         <main className="Site-main">
           {this.props.children}
         </main>
