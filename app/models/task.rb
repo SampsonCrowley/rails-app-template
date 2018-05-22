@@ -29,8 +29,11 @@ class Task < ApplicationRecord
   # == Instance Methods =====================================================
   def future_due_date
     return true if due_date.blank?
-    if due_date < Date.today
+    if due_date < Date.current
       errors.add(:due_date, 'cannot be in the past')
+      false
+    else
+      true
     end
   end
 end

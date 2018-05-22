@@ -21,6 +21,7 @@ module DefaultAppName
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    # config.time_zone = 'Mountain Time (US & Canada)'
     config.active_record.default_timezone = :utc
     config.eager_load_paths += Dir["#{config.root}/lib/modules/**/"]
     config.active_record.schema_format = :sql
@@ -39,7 +40,7 @@ module DefaultAppName
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.app_generators.scaffold_controller = :scaffold_controller
-    
+
     # Middleware for ActiveAdmin
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Flash

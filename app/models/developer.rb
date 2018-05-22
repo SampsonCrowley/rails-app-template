@@ -39,6 +39,9 @@ class Developer < ApplicationRecord
     def older_than_12
       if dob > 13.years.ago.to_date
         errors.add(:dob, 'You must be at least 13 years old to use this app')
+        false
+      else
+        true
       end
     end
 end
