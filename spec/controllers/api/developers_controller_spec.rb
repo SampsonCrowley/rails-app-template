@@ -35,6 +35,23 @@ RSpec.describe API::DevelopersController, type: :controller do
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end
+
+    it "is limited to 100 results" do
+      150.times do
+        create(:developer)
+      end
+      get :index, params: {}, session: valid_session
+      expect(JSON.parse(response.body).size).to eq(100)
+    end
+
+    it "takes a 'start' param to offset results" do
+      150.times do |i|
+        create(:developer)
+      end
+      developer = Developer.order(:id).offset(10).limit(1).last
+      get :index, params: {start: 10}, session: valid_session
+      expect(JSON.parse(response.body).first['id']).to eq(developer.id)
+    end
   end
 
   describe "GET #show" do

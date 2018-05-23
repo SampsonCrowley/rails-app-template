@@ -3,14 +3,14 @@ class API::DevelopersController < ApplicationController
 
   # GET /developers
   def index
-    @developers = Developer.all
+    @developers = Developer.order(:id).select(:id, :email, :first, :last).limit(100).offset(params[:start].presence || 0).all
 
     render json: @developers
   end
 
   # GET /developers/1
   def show
-    render json: @developer
+    render json: @developer.to_json(include: { tasks: { only: [:id, :title]}})
   end
 
   # POST /developers
@@ -41,7 +41,7 @@ class API::DevelopersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_developer
-      @developer = Developer.find(params[:id])
+      @developer = Developer.includes(tasks: {only: [:id, :title]}).find_by(id: params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

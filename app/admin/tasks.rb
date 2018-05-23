@@ -1,5 +1,5 @@
-# ActiveAdmin.register Task do
-#   permit_params :title, :description, :due_date, :developer_id
+ActiveAdmin.register Task do
+  permit_params :title, :description, :due_date, :developer_id
 # # See permitted parameters documentation:
 # # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 # #
@@ -13,4 +13,4 @@
 # #   permitted
 # # end
 #
-# end
+end
