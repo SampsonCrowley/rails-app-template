@@ -16,7 +16,7 @@ gem 'puma', '~> 3.11'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0.1'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -35,6 +35,11 @@ gem 'devise'
 gem 'activeadmin'
 
 gem 'where_exists', github: 'SampsonCrowley/where_exists', ref: '7345edc0e6de9b39beab2d32d0da299da7d78a0b'
+
+gem 'sidekiq', '~> 5.1.3'
+gem 'sidekiq-limit_fetch', '~> 3.4.0'
+gem 'sidekiq-status', '~> 1.0.1'
+gem 'redis-namespace', '~> 1.6.0'
 
 gem 'inky-rb', require: 'inky'
 # Stylesheet inlining for email **

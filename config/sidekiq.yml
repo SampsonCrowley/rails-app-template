@@ -1,0 +1,17 @@
+---
+:concurrency: 7
+:pidfile: ./tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
+:queues:
+  - default
+  - <%= `echo "inventory_$(hostname)"`.strip %>
+  - <%= `hostname`.strip %>
+  - mailers
+  - error_mailer
+:limits:
+  default: 4
+  <%= `echo "inventory_$(hostname)"`.strip %>: 1
+  <%= `hostname`.strip %>: 2
+  mailers: 1
+  error_mailer: 1
+:daemon: false

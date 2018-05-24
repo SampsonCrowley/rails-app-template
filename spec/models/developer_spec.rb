@@ -122,6 +122,63 @@ RSpec.describe Developer, type: :model do
       end
     end
 
+    describe :avatar do
+      let(:developer) do
+        create(:developer)
+      end
+
+      before(:each) do
+        developer.pre_avatar.purge
+        developer.avatar.purge
+        developer.reload
+      end
+
+      describe "validated through pre_avatar" do
+
+
+        it "is an image mime_type" do
+          image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'avatar.svg'))
+          pdf_file = File.open(Rails.root.join('spec', 'factories', 'pdfs', 'sample.pdf'))
+          developer.pre_avatar.attach(io: pdf_file, filename: 'sample.pdf')
+          expect(developer.valid?).to be false
+          expect(developer.errors[:pre_avatar]).to include('is not an image file')
+
+          developer.reload
+          expect(developer.avatar.attached?).to be false
+          expect(developer.pre_avatar.attached?).to be false
+
+          developer.pre_avatar.attach(io: image_file, filename: 'avatar.svg', content_type: 'image/svg+xml')
+          expect(developer.valid?).to be true
+          expect(developer.errors[:pre_avatar]).to be_empty
+
+          developer.reload
+          expect(developer.avatar.attached?).to be true
+          expect(developer.pre_avatar.attached?).to be false
+        end
+
+        it "is < 500KB" do
+          small_image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'avatar.png'))
+          large_image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'large-avatar.jpg'))
+
+          developer.pre_avatar.attach(io: large_image_file, filename: 'large.jpg', content_type: 'image/jpeg')
+          expect(developer.valid?).to be false
+          expect(developer.errors[:pre_avatar]).to include('is too large, avatar must be < 500KB')
+
+          developer.reload
+          expect(developer.avatar.attached?).to be false
+          expect(developer.pre_avatar.attached?).to be false
+
+          developer.pre_avatar.attach(io: small_image_file, filename: 'small.png', content_type: 'image/png')
+          expect(developer.valid?).to be true
+          expect(developer.errors[:pre_avatar]).to be_empty
+
+          developer.reload
+          expect(developer.avatar.attached?).to be true
+          expect(developer.pre_avatar.attached?).to be false
+        end
+      end
+    end
+
   end
 
   describe :associations do

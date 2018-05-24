@@ -24,7 +24,12 @@ module DefaultAppName
     # config.time_zone = 'Mountain Time (US & Canada)'
     config.active_record.default_timezone = :utc
     config.eager_load_paths += Dir["#{config.root}/lib/modules/**/"]
+    # config.autoload_paths += %W(#{config.root}/config/routes)
     config.active_record.schema_format = :sql
+    config.active_job.queue_adapter = :sidekiq
+    config.generators.stylesheets = false
+    config.generators.javascripts = false
+
     config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
     config.action_mailer.default_url_options = {
       :host => 'https://lvh.me:3000'
