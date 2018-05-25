@@ -128,54 +128,75 @@ RSpec.describe Developer, type: :model do
       end
 
       before(:each) do
-        developer.pre_avatar.purge
         developer.avatar.purge
         developer.reload
       end
 
-      describe "validated through pre_avatar" do
+      it "accepts any image mime_type" do
+        png_image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'avatar.png'))
+        svg_image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'avatar.svg'))
+        pdf_file = File.open(Rails.root.join('spec', 'factories', 'pdfs', 'sample.pdf'))
+        developer.avatar.attach(io: pdf_file, filename: 'sample.pdf')
+        expect(developer.valid?).to be false
+        expect(developer.errors[:avatar]).to include('is not an image file')
 
+        developer.reload
+        expect(developer.avatar.attached?).to be false
 
-        it "is an image mime_type" do
-          image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'avatar.svg'))
-          pdf_file = File.open(Rails.root.join('spec', 'factories', 'pdfs', 'sample.pdf'))
-          developer.pre_avatar.attach(io: pdf_file, filename: 'sample.pdf')
-          expect(developer.valid?).to be false
-          expect(developer.errors[:pre_avatar]).to include('is not an image file')
+        developer.avatar.attach(io: png_image_file, filename: 'avatar.png', content_type: 'image/png')
+        expect(developer.valid?).to be true
+        expect(developer.errors[:avatar]).to be_empty
 
-          developer.reload
-          expect(developer.avatar.attached?).to be false
-          expect(developer.pre_avatar.attached?).to be false
+        developer.reload
+        expect(developer.avatar.attached?).to be true
 
-          developer.pre_avatar.attach(io: image_file, filename: 'avatar.svg', content_type: 'image/svg+xml')
-          expect(developer.valid?).to be true
-          expect(developer.errors[:pre_avatar]).to be_empty
+        developer.avatar.purge
+        developer.reload
 
-          developer.reload
-          expect(developer.avatar.attached?).to be true
-          expect(developer.pre_avatar.attached?).to be false
-        end
+        developer.avatar.attach(io: svg_image_file, filename: 'avatar.svg', content_type: 'image/svg+xml')
+        expect(developer.valid?).to be true
+        expect(developer.errors[:avatar]).to be_empty
 
-        it "is < 500KB" do
-          small_image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'avatar.png'))
-          large_image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'large-avatar.jpg'))
+        developer.reload
+        expect(developer.avatar.attached?).to be true
+      end
 
-          developer.pre_avatar.attach(io: large_image_file, filename: 'large.jpg', content_type: 'image/jpeg')
-          expect(developer.valid?).to be false
-          expect(developer.errors[:pre_avatar]).to include('is too large, avatar must be < 500KB')
+      it "is < 500KB" do
+        small_image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'avatar.png'))
+        large_image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'large-avatar.jpg'))
 
-          developer.reload
-          expect(developer.avatar.attached?).to be false
-          expect(developer.pre_avatar.attached?).to be false
+        developer.avatar.attach(io: large_image_file, filename: 'large.jpg', content_type: 'image/jpeg')
+        expect(developer.valid?).to be false
+        expect(developer.errors[:avatar]).to include('is too large, avatar must be < 500KB')
 
-          developer.pre_avatar.attach(io: small_image_file, filename: 'small.png', content_type: 'image/png')
-          expect(developer.valid?).to be true
-          expect(developer.errors[:pre_avatar]).to be_empty
+        developer.reload
+        expect(developer.avatar.attached?).to be false
 
-          developer.reload
-          expect(developer.avatar.attached?).to be true
-          expect(developer.pre_avatar.attached?).to be false
-        end
+        developer.avatar.attach(io: small_image_file, filename: 'small.png', content_type: 'image/png')
+        expect(developer.valid?).to be true
+        expect(developer.errors[:avatar]).to be_empty
+
+        developer.reload
+        expect(developer.avatar.attached?).to be true
+      end
+
+      it "will not overwrite an existing avatar with an invalid one" do
+        small_image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'avatar.png'))
+        large_image_file = File.open(Rails.root.join('spec', 'factories', 'images', 'large-avatar.jpg'))
+
+        developer.attach_avatar(io: small_image_file, filename: 'small.png', content_type: 'image/png')
+
+        developer.reload
+        expect(developer.avatar.attached?).to be true
+        expect(developer.last_avatar.attached?).to be true
+
+        developer.avatar.attach(io: large_image_file, filename: 'large.jpg', content_type: 'image/jpeg')
+        expect(developer.valid?).to be false
+        expect(developer.errors[:avatar]).to include('is too large, avatar must be < 500KB')
+
+        developer.reload
+        expect(developer.avatar.attached?).to be true
+        expect(developer.last_avatar.attached?).to be true
       end
     end
 

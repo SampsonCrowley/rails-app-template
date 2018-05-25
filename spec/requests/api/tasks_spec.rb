@@ -20,7 +20,7 @@ RSpec.describe "API::Tasks", type: :request do
     end
 
     it "returns all tasks" do
-      expect(JSON.parse(result.body).size).to eq(Developer.count)
+      expect(JSON.parse(result.body).size).to eq(Task.count)
     end
   end
 

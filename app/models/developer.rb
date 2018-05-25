@@ -11,11 +11,12 @@ class Developer < ApplicationRecord
   #       email:  :text, required
   #  created_at:  :datetime,
   #  updated_at:  :datetime
+  attribute :new_avatar, :boolean
 
   # == Extensions ===========================================================
 
   # == Relationships ========================================================
-  has_one_attached :pre_avatar
+  has_one_attached :last_avatar
   has_one_attached :avatar
   has_many :tasks, inverse_of: :developer
 
@@ -29,15 +30,21 @@ class Developer < ApplicationRecord
                     format: { with: /\A[^@;\/\\]+\@[^@;\/\\]+\.[^@;\.\/\\]+\z/ },
                     uniqueness: { case_sensitive: false }
 
-  validate :pre_avatar, :valid_image
+  validate :avatar, :valid_image
 
   # == Scopes ===============================================================
 
   # == Callbacks ============================================================
+  after_save :cache_current_avatar, if: :new_avatar?
 
   # == Class Methods ========================================================
 
   # == Instance Methods =====================================================
+
+  def attach_avatar(file, options = {})
+    avatar.attach(file, **options)
+    __send__ :valid_image
+  end
 
   private
     def older_than_12
@@ -50,28 +57,56 @@ class Developer < ApplicationRecord
     end
 
     def valid_image_format
-      unless pre_avatar.blob.content_type.start_with? 'image/'
-        errors.add(:pre_avatar, 'is not an image file')
+      unless avatar.blob.content_type.start_with? 'image/'
+        errors.add(:avatar, 'is not an image file')
         return false
       end
       true
     end
 
     def valid_image_size
-      if pre_avatar.blob.byte_size > 500.kilobytes
-        errors.add(:pre_avatar, 'is too large, avatar must be < 500KB')
+      if avatar.blob.byte_size > 500.kilobytes
+        errors.add(:avatar, 'is too large, avatar must be < 500KB')
         return false
       end
       true
     end
 
     def valid_image
-      return unless pre_avatar.attached?
+      return unless avatar.attached?
 
-      valid_image_format &&
-      valid_image_size &&
-      avatar.attach(pre_avatar.blob)
+      if valid_image_format && valid_image_size
+        cache_current_avatar
+      else
+        purge(avatar)
+        load_last_avatar if last_avatar.attached?
+        false
+      end
 
-      pre_avatar.purge_later
+    end
+
+    def cache_current_avatar
+      copy_avatar
+    end
+
+    def load_last_avatar
+      copy_avatar :last_avatar, :avatar
+    end
+
+    def copy_avatar(from = :avatar, to = :last_avatar)
+      from = __send__ from
+      to = __send__ to
+
+      purge(to) if to.attached?
+
+      tmp = Tempfile.new
+      tmp.binmode
+      tmp.write(from.download)
+      tmp.flush
+      tmp.rewind
+
+      to.attach(io: tmp, filename: from.filename, content_type: from.content_type)
+      tmp.close
+      true
     end
 end
