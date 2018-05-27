@@ -8,8 +8,19 @@
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    {{#manifest}}
+      <link rel="manifest" href="{{manifest}}">
+    {{/manifest}}
+    {{^manifest}}
+      <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    {{/manifest}}
+    {{#favicon}}
+      <link rel="shortcut icon" href="{{favicon}}">
+    {{/favicon}}
+    {{^favicon}}
+      <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    {{/favicon}}
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -19,13 +30,34 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>
+      {{#title}}
+        {{title}}
+      {{/title}}
+      {{^title}}
+        DefaultAppName
+      {{/title}}
+    </title>
   </head>
   <body>
     <noscript>
-      You need to enable JavaScript to run this app.
+      <style>
+        #root{display: none}
+        #noscript{display: block}
+      </style>
     </noscript>
+    <div>
+      <!--[if !IE]><!--><style>.ie-only { display: none !important; }</style><!--<![endif]-->
+    </div>
     <div id="root"></div>
+    <div id='noscript'>
+      <h1>OOPS! YOU&apos;VE DISABLED JAVASCRIPT</h1>
+      <p>This website runs on ReactJS, a framework that relies on JavaScript to function.</p>
+      <p>Please enable JavaScript, then <a href="#" onclick='if(event.preventDefault) event.preventDefault(); else event.returnValue = false; location && location.reload();'>Click Here</a></p>
+    </div>
+
+    <input type='hidden' id="app-version" value="{{version}}" />
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

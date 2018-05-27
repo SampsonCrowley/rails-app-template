@@ -16,7 +16,7 @@
 !/log/.keep
 !/tmp/.keep
 
-# Ignore uploaded files in development and files taht will be compiled in production
+# Ignore uploaded files in development and files that will be compiled in production
 /public/*
 /storage/*
 !/public/.keep

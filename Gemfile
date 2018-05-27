@@ -50,6 +50,9 @@ gem 'dkim'
 # https://berislavbabic.com/send-pdf-attachments-from-rails-with-wickedpdf-and-actionmailer/
 gem 'wicked_pdf', '~> 1.1.0'
 
+gem 'mustache', '~> 1.0'
+gem "stache", '~> 1.2'
+
 gem 'icalendar', '~> 2.4', '>= 2.4.1'
 gem 'rubyzip', '>= 1.2.1'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
