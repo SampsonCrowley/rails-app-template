@@ -9,12 +9,7 @@
   "scripts": {
     "build": "yarn --cwd client install && yarn --cwd client build",
     "deploy": "cp -a client/build/. public/",
-    "mustachify": "cp -a public/index.html app/templates/application.html.mustache && yarn prettier-layout",
-    "prettier-layout": "js-beautify --html -f app/templates/application.html.mustache --replace --type html",
+    "mustachify": "cp -a public/index.html app/templates/layouts/application.html.mustache",
     "heroku-postbuild": "yarn build && yarn deploy && yarn mustachify"
   },
-  "devDependencies": {
-    "js-beautify": "^1.7.5"
-  },
-  "dependencies": {}
 }
