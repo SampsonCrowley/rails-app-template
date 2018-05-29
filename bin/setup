@@ -27,14 +27,14 @@ chdir APP_ROOT do
         downcase
       end
     end
-    Dir.glob("#{APP_ROOT}/{config,test,client,config/initializers}/*.{json,rb,js,yml}").each do |file|
+    Dir.glob("#{APP_ROOT}/{config,test,client,config/initializers}/**/{.*,*}.{json,rb,js,yml}").each do |file|
       unless File.directory?(file)
         txt = File.read(file)
         txt = txt.gsub(/DefaultAppName/, nm).gsub(/default_app_name/, nm.underscore)
         File.open(file, 'w') {|f| f << txt}
       end
     end
-    Dir.glob("#{APP_ROOT}/{config,test,client,config/initializers}/*.base").each do |file|
+    Dir.glob("#{APP_ROOT}/{config,test,client,config/initializers}/**/{.*,*}.base").each do |file|
       new_file = file.to_s.sub('.base', '')
       unless File.exist?(new_file)
         unless File.directory?(file)
