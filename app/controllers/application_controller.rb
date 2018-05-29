@@ -93,13 +93,21 @@ class ApplicationController < ActionController::Base
 
       case resulting
       when Net::HTTPSuccess then
-        resulting
+        resulting.body
       when Net::HTTPRedirection then
         loc = resulting['location']
         warn "redirected to #{loc}"
         fetch(loc, limit - 1)
       else
-        resulting.value
+        begin
+          resulting.value
+        rescue
+          begin
+            resulting.body
+          rescue
+            resulting
+          end
+        end
       end
     end
 
@@ -118,17 +126,19 @@ class ApplicationController < ActionController::Base
         if matches = regex.match(original_path)
           id = matches[1]
 
-          p "SHOULD FETCH: #{data[:api] && id}"
+          p "SHOULD FETCH: #{!!(data[:api] && id).to_s}"
 
           if data[:api] && id
             resource = {}
             begin
-              puts "FETCHING DATA"
-              p "RESULT:", resulting = fetch(request.base_url + data[:api] + id)
-              p "RESOURCE:", resource = JSON.parse(resulting).to_h.deep_stringify_keys
-              p "ID:", id = resource[data[:method] || 'title']
-              p "DONE FETCHING DATA"
+              puts "FETCHING DATA: #{request.base_url + data[:api] + id}"
+              resulting = fetch(request.base_url + data[:api] + id)
+              resource = JSON.parse(resulting).to_h.deep_stringify_keys
+              id = resource[data[:method] || 'title']
+              puts "DONE FETCHING DATA: #{request.base_url + data[:api] + id}"
             rescue
+              p "ERROR: #{$!.message}"
+              puts $!.backtrace.first(10)
             end
           end
           title = data[:title].sub(/%RESOURCE%/, id)
