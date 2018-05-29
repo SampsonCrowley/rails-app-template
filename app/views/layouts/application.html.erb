@@ -4,34 +4,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
-    
-    {{{links}}}
-    {{{oembed}}}
-    {{{ograph}}}
-    
-    {{{gschema}}}
-    
-    {{{twitter}}}
-    
+
+    <%= @meta_data[:ograph] %>
+    <%= @meta_data[:gschema] %>
+    <%= @meta_data[:twitter] %>
+
     <meta name="twitter:dnt" content="on">
 
-    
+
     <link rel="manifest" href="/manifest.json">
 
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.ico">
     <link rel="mask-icon" href="/favicon.ico" color="blue">
 
-    
     <title>
-      {{#title}}
-        {{title}}
-      {{/title}}
-      {{^title}}
-        DefaultAppName
-      {{/title}}
+      <%= @meta_data[:title] || 'DefaultAppName' %>
     </title>
-  <link href="/static/css/main.3599758c.css" rel="stylesheet"></head>
+
+    <% Rails.application.config.route_info[:manifest].each do |k, v| %>
+      <% if k =~ /\.css$/ %>
+        <link href="<%= v %>" rel="stylesheet">
+      <% end %>
+    <% end %>
+  </head>
   <body>
     <noscript>
       <style>#root{display:none}#noscript{display:block!important}</style>
@@ -48,6 +44,10 @@
 
     <input type="hidden" id="app-version" value="{{version}}"/>
 
-    
-  <script type="text/javascript" src="/static/js/main.35af446c.js"></script></body>
+    <% Rails.application.config.route_info[:manifest].each do |k, v| %>
+      <% if k =~ /\.js$/ %>
+        <script type="text/javascript" src="<%= v %>"></script>
+      <% end %>
+    <% end %>
+  </body>
 </html>

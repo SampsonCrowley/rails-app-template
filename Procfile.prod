@@ -1,0 +1,3 @@
+rails: bundle exec rails s -p 3000
+queue: bin/run_queue
+redis: redis-server
