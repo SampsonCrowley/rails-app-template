@@ -30,15 +30,32 @@ module DefaultAppName
     config.generators.stylesheets = false
     config.generators.javascripts = false
 
+    base_path = Rails.root.join('public')
+    unparsed = (File.exist?(base_path.join('routes.json')) ? JSON.parse(File.read(base_path.join('routes.json'))) : {}).to_h.deep_symbolize_keys
+    config.route_info = {
+      domain: unparsed[:domain].presence || 'https://lvh.me',
+      links: unparsed[:links].presence || {}
+    }
+
+    unparsed = (File.exist?(base_path.join('asset-manifest.json')) ? JSON.parse(File.read(base_path.join('asset-manifest.json'))) : {}).to_h.deep_symbolize_keys
+
+    config.route_info[:manifest] = (unparsed.presence || {}).deep_stringify_keys
+    unparsed = {}
+    config.route_info[:manifest].each do |k, v|
+      unparsed[k.sub(/static\/.*?\//, '')] = v
+    end
+
+    config.route_info[:manifest].merge! unparsed
+
+    config.route_info[:links].each do |route, info|
+      info[:image] = unparsed[info[:image]] || info[:image] if info[:image].present?
+    end
+
     config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
     config.action_mailer.default_url_options = {
-      :host => 'https://lvh.me:3000'
+      :host => config.route_info[:domain]
     }
-    Rails.application.routes.default_url_options[:host] = 'http://lvh.me:3000'
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
+    Rails.application.routes.default_url_options[:host] = config.route_info[:domain]
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.

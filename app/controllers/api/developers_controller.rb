@@ -10,6 +10,7 @@ class API::DevelopersController < ApplicationController
 
   # GET /developers/1
   def show
+    p "SHOWING", @developer
     render json: @developer.to_json(include: { tasks: { only: [:id, :title]}})
   end
 
@@ -41,7 +42,7 @@ class API::DevelopersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_developer
-      @developer = Developer.includes(tasks: {only: [:id, :title]}).find_by(id: params[:id])
+      @developer = Developer.includes(:tasks).find_by(id: params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

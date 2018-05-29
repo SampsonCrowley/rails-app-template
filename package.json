@@ -7,9 +7,11 @@
     "yarn": "1.6.0"
   },
   "scripts": {
-    "build": "yarn --cwd client install && yarn --cwd client build",
+    "build": "yarn compile && yarn deploy && yarn routes && yarn mustachify",
+    "compile": "yarn --cwd client install && yarn --cwd client build",
+    "routes": "cp -a client/src/routes.json public/routes.json",
     "deploy": "cp -a client/build/. public/",
-    "mustachify": "cp -a public/index.html app/templates/layouts/application.html.mustache",
-    "heroku-postbuild": "yarn build && yarn deploy && yarn mustachify"
-  },
+    "mustachify": "cp -a public/index.html app/templates/layouts/application.html.mustache && rm public/index.html",
+    "heroku-postbuild": "yarn build"
+  }
 }

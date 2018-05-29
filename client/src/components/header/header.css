@@ -1,6 +1,6 @@
 .Site-header {
   background-color: #999;
-  background-image: url("https://cdn.shopify.com/s/files/1/0019/2443/1932/files/29594662_1356057684494560_3642511867537521213_n.jpg?v=1526093937");
+  background-image: url("~assets/images/background.svg");
   background-position: 50%;
   background-position: center center;
   background-size: cover;
@@ -11,7 +11,7 @@
   min-height: 25vh;
   padding: 20px;
   color: #fff;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.6);
   color: #eee;
   padding-bottom: 16rem;
 }

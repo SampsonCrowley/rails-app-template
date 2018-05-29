@@ -1,5 +1,5 @@
 {
 "name": "Header",
 "private": true,
-"main": "./header.js"
+"main": "./header.jsx"
 }

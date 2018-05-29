@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "application#fallback_index_html"
   require 'sidekiq/web'
   require 'sidekiq-status/web'
   mount Sidekiq::Web => '/sidekiq'

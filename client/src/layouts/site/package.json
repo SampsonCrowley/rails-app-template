@@ -1,5 +1,5 @@
 {
 "name": "SiteLayout",
 "private": true,
-"main": "./site.js"
+"main": "./site.jsx"
 }

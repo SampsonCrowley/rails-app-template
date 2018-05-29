@@ -5,21 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <!--
+      mustache template placeholders for meta tags
+    -->
+    {{{links}}}
+    {{{oembed}}}
+    {{{ograph}}}
+    <!--
+      <meta property="fb:app_id" content="123456789">
+      <meta property="og:url" content="http://example.com/page.html">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="Content Title">
+      <meta property="og:image" content="http://example.com/image.jpg">
+      <meta property="og:description" content="Description Here">
+      <meta property="og:site_name" content="Site Name">
+      <meta property="og:locale" content="en_US">
+      <meta property="article:author" content="">
+    -->
+    {{{gschema}}}
+    <!--
+      <link rel="author" href="">
+      <link rel="publisher" href="">
+      <meta itemprop="name" content="Content Title">
+      <meta itemprop="description" content="Content description less than 200 characters">
+      <meta itemprop="image" content="http://example.com/image.jpg">
+    -->
+    {{{twitter}}}
+    <!--
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:site" content="@site_account">
+      <meta name="twitter:creator" content="@individual_account">
+      <meta name="twitter:url" content="http://example.com/page.html">
+      <meta name="twitter:title" content="Content Title">
+      <meta name="twitter:description" content="Content description less than 200 characters">
+      <meta name="twitter:image" content="http://example.com/image.jpg">
+    -->
+    <meta name="twitter:dnt" content="on">
+
+    <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    {{#manifest}}
-      <link rel="manifest" href="{{manifest}}">
-    {{/manifest}}
-    {{^manifest}}
-      <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    {{/manifest}}
-    {{#favicon}}
-      <link rel="shortcut icon" href="{{favicon}}">
-    {{/favicon}}
-    {{^favicon}}
-      <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    {{/favicon}}
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="mask-icon" href="%PUBLIC_URL%/favicon.ico" color="blue">
 
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -43,14 +73,14 @@
     <noscript>
       <style>
         #root{display: none}
-        #noscript{display: block}
+        #noscript{display: block !important}
       </style>
     </noscript>
     <div>
       <!--[if !IE]><!--><style>.ie-only { display: none !important; }</style><!--<![endif]-->
     </div>
     <div id="root"></div>
-    <div id='noscript'>
+    <div id='noscript' style='display: none'>
       <h1>OOPS! YOU&apos;VE DISABLED JAVASCRIPT</h1>
       <p>This website runs on ReactJS, a framework that relies on JavaScript to function.</p>
       <p>Please enable JavaScript, then <a href="#" onclick='if(event.preventDefault) event.preventDefault(); else event.returnValue = false; location && location.reload();'>Click Here</a></p>

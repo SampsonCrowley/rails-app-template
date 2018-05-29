@@ -1,0 +1,45 @@
+{
+  "domain": "https://default_app_name.com",
+  "links": {
+    "root": {
+      "title": "Home",
+      "path": "",
+      "canonical": "/",
+      "description": "DefaultAppName: The best company",
+      "image": "logo.svg",
+      "index": true
+    },
+    "page": {
+      "title": "Page Changed",
+      "path": "page",
+      "canonical": "/page",
+      "description": "Well... Maybe not so much",
+      "image": "logo.svg",
+      "index": true
+    },
+    "pages": {
+      "title": "Page Changed - %RESOURCE%",
+      "path": "pages",
+      "canonical": "/pages",
+      "description": "Well... Maybe not so much",
+      "image": "logo.svg",
+      "index": true,
+      "resource": true
+    },
+    "developers": {
+      "api": "/api/developers/",
+      "method": "email",
+      "title": "%RESOURCE%",
+      "path": "developers",
+      "canonical": "/developers",
+      "description": "Well... Maybe not so much",
+      "image": "logo.svg",
+      "index": true,
+      "resource": true
+    },
+    "alternate": {
+      "alias": true,
+      "to": "page"
+    }
+  }
+}

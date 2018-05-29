@@ -40,3 +40,4 @@
 *.lock
 *.DS_Store
 *.log*
+*.rdb

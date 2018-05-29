@@ -1,36 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    
+    {{{links}}}
+    {{{oembed}}}
+    {{{ograph}}}
+    
+    {{{gschema}}}
+    
+    {{{twitter}}}
+    
+    <meta name="twitter:dnt" content="on">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  <meta name="theme-color" content="#222222">{{#manifest}}
-  <link rel="manifest" href="{{manifest}}">{{/manifest}} {{^manifest}}
-  <link rel="manifest" href="/manifest.json">{{/manifest}} {{#favicon}}
-  <link rel="shortcut icon" href="{{favicon}}">{{/favicon}} {{^favicon}}
-  <link rel="shortcut icon" href="/favicon.ico">{{/favicon}}
-  <title>{{#title}} {{title}} {{/title}} {{^title}} DefaultAppName {{/title}}</title>
-  <link href="/static/css/main.5d1945ee.css" rel="stylesheet">
-</head>
+    
+    <link rel="manifest" href="/manifest.json">
 
-<body><noscript><style>#root{display:none}#noscript{display:block}</style></noscript>
-  <div>
-    <!--[if !IE]><!-->
-    <style>
-      .ie-only {
-        display: none !important
-      }
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.ico">
+    <link rel="mask-icon" href="/favicon.ico" color="blue">
 
-    </style>
-    <!--<![endif]-->
-  </div>
-  <div id="root"></div>
-  <div id="noscript">
-    <h1>OOPS! YOU&apos;VE DISABLED JAVASCRIPT</h1>
-    <p>This website runs on ReactJS, a framework that relies on JavaScript to function.</p>
-    <p>Please enable JavaScript, then <a href="#" onclick="event.preventDefault?event.preventDefault():event.returnValue=!1,location&&location.reload()">Click Here</a></p>
-  </div><input type="hidden" id="app-version" value="{{version}}" />
-  <script type="text/javascript" src="/static/js/main.f14218d2.js"></script>
-</body>
+    
+    <title>
+      {{#title}}
+        {{title}}
+      {{/title}}
+      {{^title}}
+        DefaultAppName
+      {{/title}}
+    </title>
+  <link href="/static/css/main.3599758c.css" rel="stylesheet"></head>
+  <body>
+    <noscript>
+      <style>#root{display:none}#noscript{display:block!important}</style>
+    </noscript>
+    <div>
+      <!--[if !IE]><!--><style>.ie-only{display:none!important}</style><!--<![endif]-->
+    </div>
+    <div id="root"></div>
+    <div id="noscript" style="display:none">
+      <h1>OOPS! YOU&apos;VE DISABLED JAVASCRIPT</h1>
+      <p>This website runs on ReactJS, a framework that relies on JavaScript to function.</p>
+      <p>Please enable JavaScript, then <a href="#" onclick="event.preventDefault?event.preventDefault():event.returnValue=!1,location&&location.reload()">Click Here</a></p>
+    </div>
 
+    <input type="hidden" id="app-version" value="{{version}}"/>
+
+    
+  <script type="text/javascript" src="/static/js/main.35af446c.js"></script></body>
 </html>
