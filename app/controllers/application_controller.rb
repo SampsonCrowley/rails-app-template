@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
     def gschema
       @gschema ||= %Q(
         <link rel="canonical" href="#{route_info[:domain].to_s}#{path_data[:canonical].to_s}">
-        <meta itemprop="name" content="#{path_data[:title].to_s.presence || "DefaultAppName"}">
+        <meta itemprop="name" content="#{title}">
         <meta itemprop="description" content="#{path_data[:description].to_s}">
         #{path_data[:image].present? ? %Q(<meta itemprop="image" content="#{route_info[:domain].to_s}/#{path_data[:image].to_s}">) : ''}
       ).html_safe
@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
       @ograph ||= %Q(
         <meta property="og:url" content="#{route_info[:domain].to_s}#{path_data[:canonical].to_s}">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="#{path_data[:title].to_s.presence || "DefaultAppName"}">
+        <meta property="og:title" content="#{title}">
         #{path_data[:image].present? ? %Q(<meta property="og:image" content="#{route_info[:domain].to_s}/#{path_data[:image].to_s}">) : ''}
         <meta property="og:description" content="#{path_data[:description].to_s}">
         <meta property="og:site_name" content="DefaultAppName">
@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
       @twitter ||= %Q(
         <meta name="twitter:card" content="summary">
         <meta name="twitter:url" content="#{route_info[:domain].to_s}#{path_data[:canonical].to_s}">
-        <meta name="twitter:title" content="#{path_data[:title].to_s.presence || "DefaultAppName"}">
+        <meta name="twitter:title" content="#{title}">
         <meta name="twitter:description" content="#{path_data[:description].to_s}">
         #{path_data[:image].present? ? %Q(<meta name="twitter:image" content="#{route_info[:domain].to_s}/#{path_data[:image].to_s}">) : ''}
       )
@@ -118,14 +118,16 @@ class ApplicationController < ActionController::Base
         if matches = regex.match(original_path)
           id = matches[1]
 
-          p data[:api] && id
+          p "SHOULD FETCH: #{data[:api] && id}"
 
           if data[:api] && id
             resource = {}
             begin
-              p resulting = fetch(request.base_url + data[:api] + id)
-              p resource = JSON.parse(resulting).to_h.deep_stringify_keys
-              p id = resource[data[:method] || 'title']
+              puts "FETCHING DATA"
+              p "RESULT:", resulting = fetch(request.base_url + data[:api] + id)
+              p "RESOURCE:", resource = JSON.parse(resulting).to_h.deep_stringify_keys
+              p "ID:", id = resource[data[:method] || 'title']
+              p "DONE FETCHING DATA"
             rescue
             end
           end
@@ -134,7 +136,7 @@ class ApplicationController < ActionController::Base
 
       end
 
-      data[:title] = title || data[:title]
+      data[:title] = title.presence || data[:title]
 
       puts data
 

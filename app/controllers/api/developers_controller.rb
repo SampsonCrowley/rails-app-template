@@ -1,4 +1,4 @@
-class API::DevelopersController < ApplicationController
+class API::DevelopersController < API::ApplicationController
   before_action :set_developer, only: [:show, :update, :destroy]
 
   # GET /developers
