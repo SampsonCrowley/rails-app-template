@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import Header from 'components/header';
 import './site.css';
 
+const scrollEvents = ['scroll', 'touchmove']
+
 class Site extends Component {
   static propTypes = {
     children: PropTypes.any
@@ -26,13 +28,13 @@ class Site extends Component {
   }
 
   unbind = () => {
-    window.removeEventListener('scroll', this.state.scrollListener)
+    scrollEvents.map((e) => window.removeEventListener(e, this.state.scrollListener))
   }
 
   bindScroll = (delay = 10, unbind = false) => {
     unbind && this.unbind()
     const scrollListener = debounce(this.handleScroll(), delay)
-    window.addEventListener('scroll', scrollListener)
+    scrollEvents.map((e) => window.addEventListener(e, scrollListener))
     this.setState({scrollListener, delay})
   }
 
