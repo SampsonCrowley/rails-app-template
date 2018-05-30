@@ -1,64 +1,104 @@
 .Site-header
-  background-color: #999;
+  position: sticky;
+  background-color: #222;
   background-image: url('~assets/images/background.svg');
   background-position: 50%;
   background-position: center center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
 
   .header-content
-    min-height: 500px;
-    min-height: 25vh;
-    padding: 20px;
-    color: white;
-    background-color: rgba(0,0,0,0.6);
-    color: #eee;
-    padding-bottom: 16rem;
-
-    .header-nav
-      margin-right: auto;
-      margin-left: auto;
-      width: 100%;
-      max-width: 64rem;
-      display: table;
-      color: #eee;
-
-      .header-logo
-      .header-menu
-        display: table-cell;
-        padding: 1rem;
-        vertical-align: middle;
+    min-height: 500px
+    min-height: 25vh
+    padding: 20px
+    color: white
+    background-color: rgba(0,0,0,0.6)
+    color: #eee
+    padding-bottom: 16rem
+    position: relative
 
     .header-link
-      transform: scale(0.9);
-      backface-visibility: hidden;
-      transition: transform 0.25s ease-in-out;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-      color: rgba(255,255,255,0.7);
-      display: inline-block;
-      border: 1px solid #eee;
+      transform: scale(0.9)
+      background: rgba(0,0,0,0.6)
+      transition: transform 0.25s ease-in-out
+      text-decoration: none
+      padding: 0.5rem 1rem
+      text-decoration: none
+      color: rgba(255,255,255,0.7)
+      display: inline-block
+      border: 1px solid #eee
 
       &:hover
-        transform: scale(1);
+        transform: scale(1)
 
     .header-menu
       .header-menu-wrapper
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: flex-end;
-        align-items: center;
+        display: flex
+        flex-flow: row nowrap
+        justify-content: flex-end
+        align-items: center
+
+    .header-nav
+      position: absolute
+      display: table
+      width: 100%
+      max-width: 64rem
+      top: unset
+      bottom: 0
+      left: 0
+      right: 0
+      margin-right: auto
+      margin-left: auto
+      background-color: rgba(0,0,0,0)
+
+      transition: all 1s
+
+      .header-logo
+        width: 4rem
+        .header-link
+          background: rgba(0,0,0, 0)
+          color: #fff
+          padding: 0
+
+      &.nav-stuck
+        max-width: 100vw
+        background-color: #222
+        color: #eee
+
+        .header-menu
+          .header-link
+            background-color: rgba(0,0,0,0)
+            border-color: rgba(97,218,251,1)
+            color: rgba(97,218,251,1)
+          .header-link:hover
+            background: rgba(97,218,251,0.8)
+            color: #000
+            border-color: #000
+
+      &.nav-unstuck
+
+        .header-menu
+          .header-link
+            background: rgba(0,0,0, 1)
+            color: #fff
+
+
+      .header-logo
+      .header-menu
+        display: table-cell
+        padding: 1rem
+        vertical-align: middle
+
+
 
     .header-logo
       img
-        animation: Site-logo-spin infinite 20s linear;
+        animation: Site-logo-spin infinite 20s linear
       .header-link
-        width: 100%;
-        height: 4rem;
-        border: none;
+        width: 100%
+        border: none
 
 @keyframes Site-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from { transform: rotate(0deg) }
+  to { transform: rotate(360deg) }
 }
