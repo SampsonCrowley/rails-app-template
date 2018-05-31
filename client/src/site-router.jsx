@@ -30,15 +30,17 @@ export default class SiteRouter extends Component {
     menuContextStates.close = this.state.closeMenu
   }
   render () {
-    return <MenuProvider value={this.state}>
-      <Router>
-        <Site>
-          <Switch>
-            <Route path='/' exact component={HomePage} />
-            <Route component={NotFound} />
-          </Switch>
-        </Site>
-      </Router>
-    </MenuProvider>
+    return (
+      <MenuProvider value={this.state}>
+        <Router>
+          <Site>
+            <Switch>
+              <Route path='/' exact component={HomePage} />
+              <Route component={NotFound} />
+            </Switch>
+          </Site>
+        </Router>
+      </MenuProvider>
+    )
   }
 }
