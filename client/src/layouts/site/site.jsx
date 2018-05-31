@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import debounce from 'models/debounce';
 import Header from 'components/header';
 import './site.css';
 
@@ -41,7 +42,6 @@ class Site extends Component {
   handleScroll = () => {
     return () => {
       const height = this.state.height || Math.max(document.documentElement.clientHeight, window.innerHeight || 0) / 4
-      console.log('SCROLL', height, window.scrollY, (this.state.delay > 10), (window.scrollY < (height * 2)))
       if((this.state.navClass === 'nav-unstuck') && (window.scrollY > height)) this.setState({navClass: 'nav-stuck'})
       else if((this.state.navClass === 'nav-stuck') && (window.scrollY < (height + 1))) this.setState({navClass: 'nav-unstuck'})
 
