@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pages - Home is snapshotable 1`] = `
+<p
+  className="Site-intro"
+  style={
+    Object {
+      "height": "1000vh",
+    }
+  }
+>
+  To get started, edit 
+  <code>
+    src/site.js
+  </code>
+   and save to reload.
+</p>
+`;

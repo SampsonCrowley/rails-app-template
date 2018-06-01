@@ -29,6 +29,7 @@ describe('Components - Link', () => {
     global.console = {error: jest.fn()}
     expect(() => createLink({children: 'Test'})).toThrow()
     expect(console.error).toBeCalled()
+    ReactDOM.unmountComponentAtNode(div);
   })
 
   it('sets the "href" prop to "to"', () => {
@@ -36,12 +37,14 @@ describe('Components - Link', () => {
       to: '/test',
       children: 'Test'
     }).href).toMatch(/http:\/{2}[A-Za-z09\.]+\/test$/)
+    ReactDOM.unmountComponentAtNode(div);
   })
 
   it('requires children', () => {
     global.console = {error: jest.fn()}
     createLink({to: '/'})
     expect(console.error).toBeCalled()
+    ReactDOM.unmountComponentAtNode(div);
   })
 
   it('renders children', () => {
@@ -49,5 +52,17 @@ describe('Components - Link', () => {
       to: '/',
       children: 'Test'
     }).innerHTML).toMatch(/^Test$/)
+    ReactDOM.unmountComponentAtNode(div);
+  })
+
+  it('is snapshotable', () => {
+    const tree = renderer
+      .create(
+        <Router>
+          <Link to='/'>Test</Link>
+        </Router>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot()
   })
 })
