@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
-import { MemoryRouter as Router, Route, Switch } from 'react-router-dom';
+import { MemoryRouter as Router } from 'react-router-dom';
 
 import Link from './link'
 
 describe('Components - Link', () => {
   const div = document.createElement('div');
+
   const createLink = ({...props}) => {
     ReactDOM.render((
       <Router>
@@ -15,12 +16,13 @@ describe('Components - Link', () => {
     ), div);
     return div.querySelector('a')
   }
-  it('Renders an anchor tag', () => {
+
+  it('renders an anchor tag', () => {
     const rendered = createLink({
       to: '/',
       children: 'Test'
     })
-    expect(rendered)
+    expect(rendered).toBeTruthy()
     expect(rendered.tagName).toBe("A")
     ReactDOM.unmountComponentAtNode(div);
   })

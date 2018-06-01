@@ -11,18 +11,19 @@ describe('Pages - Home', () => {
     return div.querySelector('p')
   }
 
-  it('Renders an paragraph tag', () => {
+  it('renders an paragraph tag', () => {
     const rendered = createHome()
-    expect(rendered)
+    expect(rendered).toBeTruthy()
     expect(rendered.tagName).toBe("P")
     ReactDOM.unmountComponentAtNode(div);
   })
 
   it('sets an unnecessarily tall height', () => {
-    const rendered = shallow(<Home/>)
-    console.log(rendered, rendered.style)
-    expect(rendered.classList).toBe('1000vh')
-    ReactDOM.unmountComponentAtNode(div);
+    const rendered = renderer
+      .create(<Home />)
+      .toJSON();
+    expect(rendered.props.style)
+    expect(rendered.props.style.height).toBe('1000vh')
   })
 
   it('is snapshotable', () => {
