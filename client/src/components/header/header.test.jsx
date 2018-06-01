@@ -3,41 +3,40 @@ import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import { MemoryRouter as Router } from 'react-router-dom';
 
-import Site from './site'
+import Header from './header'
 
-describe('Components - Site', () => {
+describe('Components - Header', () => {
   const div = document.createElement('div');
 
-  const createSite = ({...props}) => {
+  const createHeader = ({...props}) => {
     ReactDOM.render((
       <Router>
-        <Site {...props} />
+        <Header {...props} />
       </Router>
     ), div);
-    return div.querySelector('section.site')
+    return div.querySelector('header')
   }
 
   it('renders a semantic header tag', () => {
-    const rendered = createSite()
+    const rendered = createHeader()
     expect(rendered).toBeTruthy()
-    expect(rendered.tagName).toBe("SECTION")
+    expect(rendered.tagName).toBe("HEADER")
   })
 
-  it('contains a semantic main tag', () => {
-    const rendered = createSite()
-    const main = rendered.querySelector('main')
-    expect(main).toBeTruthy()
-    expect(main.tagName).toBe('MAIN')
+  it('contains a nav tag', () => {
+    const rendered = createHeader()
+    const nav = rendered.querySelector('nav')
+    expect(nav).toBeTruthy()
+    expect(nav.tagName).toBe('NAV')
   })
 
-  it("binds a scroll event to the window")
-  it("rebinds a slower debounce scroll event past a certain scroll point")
+  it('listens to window size changes to recalculate sticky top')
 
   it('is snapshotable', () => {
     const tree = renderer
       .create(
         <Router>
-          <Site />
+          <Header />
         </Router>
       )
       .toJSON();

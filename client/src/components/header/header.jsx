@@ -8,6 +8,7 @@ import debounce from 'models/debounce';
 
 import {HeaderLinks, HeaderLogo} from './components'
 
+import documentHeight from 'models/document-height'
 import RouteParser from 'models/route-parser'
 
 import './header.css';
@@ -47,7 +48,7 @@ export default class Header extends Component {
   }
 
   handleResize = () => {
-    const h = this.headerEl.clientHeight - this.navEl.clientHeight
+    const h = (this.headerEl && this.headerEl.clientHeight || 0) - (this.navEl && this.navEl.clientHeight || 0)
     this.props.heightRef && this.props.heightRef(h)
     this.setState({top: `-${h}px`})
     menuContextStates.close && menuContextStates.close()
