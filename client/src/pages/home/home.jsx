@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'load-awesome/css/ball-atom.css';
 
 class HomePage extends Component {
   render() {

@@ -52,28 +52,28 @@ exports[`Components - Site is snapshotable 1`] = `
             className="header-menu-wrapper"
           >
             <a
-              className="header-link"
+              className="header-link "
               href="/"
               onClick={[Function]}
             >
               Home Page
             </a>
             <a
-              className="header-link"
+              className="header-link "
               href="/developers/1"
               onClick={[Function]}
             >
               Test Page
             </a>
             <a
-              className="header-link"
+              className="header-link "
               href="/pages/54326"
               onClick={[Function]}
             >
               Test Resource Page
             </a>
             <a
-              className="header-link"
+              className="header-link "
               href="/alternate"
               onClick={[Function]}
             >

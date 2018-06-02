@@ -45,7 +45,7 @@ module.exports = {
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   targetHtml: resolveApp('../app/templates/layouts/application.html.mustache'),
-  devHtml: resolveApp('public/development.html'),
+  devHtml: resolveApp('public/index.html'),
   appIndexJs: resolveApp('src/index.jsx'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),

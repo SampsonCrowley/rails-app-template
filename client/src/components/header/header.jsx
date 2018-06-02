@@ -4,12 +4,11 @@ import { withRouter } from 'react-router-dom';
 
 import background from 'assets/images/background.svg';
 import {menuContextStates} from 'contexts/menu';
-import debounce from 'models/debounce';
+import debounce from 'helpers/debounce';
 
 import {HeaderLinks, HeaderLogo} from './components'
 
-import documentHeight from 'models/document-height'
-import RouteParser from 'models/route-parser'
+import RouteParser from 'helpers/route-parser'
 
 import './header.css';
 
@@ -48,7 +47,7 @@ export default class Header extends Component {
   }
 
   handleResize = () => {
-    const h = (this.headerEl && this.headerEl.clientHeight || 0) - (this.navEl && this.navEl.clientHeight || 0)
+    const h = ((this.headerEl && this.headerEl.clientHeight) || 0) - ((this.navEl && this.navEl.clientHeight) || 0)
     this.props.heightRef && this.props.heightRef(h)
     this.setState({top: `-${h}px`})
     menuContextStates.close && menuContextStates.close()
@@ -71,7 +70,26 @@ export default class Header extends Component {
         <div className="header-content">
           <nav ref={(el) => this.navEl = el} className={`header-nav ${this.props.navClass}`}>
             <HeaderLogo />
-            <HeaderLinks />
+            <HeaderLinks
+              links={[
+                {
+                  to: "/",
+                  children: 'Home Page',
+                },
+                {
+                to: "/developers/1",
+                  children: 'Test Page',
+                },
+                {
+                to: "/pages/54326",
+                  children: 'Test Resource Page',
+                },
+                {
+                to: "/alternate",
+                  children: 'Test Aliased Page',
+                },
+              ]}
+            />
           </nav>
           <h1 className="Site-title">{this.state.title || (<span>You&apos;re Reacting!</span>)}</h1>
           {

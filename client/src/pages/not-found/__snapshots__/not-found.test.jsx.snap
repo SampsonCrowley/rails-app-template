@@ -18,5 +18,24 @@ exports[`Pages - NotFound is snapshotable 1`] = `
       Click Here to Return to the Home Page
     </a>
   </p>
+  <div
+    className="la-ball-atom la-2x "
+    style={
+      Object {
+        "color": "#00F",
+        "height": "500px",
+        "marginLeft": "auto",
+        "marginRight": "auto",
+        "maxHeight": "100vh",
+        "maxWidth": "100vw",
+        "width": "500px",
+      }
+    }
+  >
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
 </section>
 `;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import debounce from 'models/debounce';
-import documentHeight from 'models/document-height';
+import debounce from 'helpers/debounce';
+import documentHeight from 'helpers/document-height';
 import Header from 'components/header';
 import './site.css';
 

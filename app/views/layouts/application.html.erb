@@ -31,7 +31,9 @@
     <div>
       <!--[if !IE]><!--><style>.ie-only{display:none!important}</style><!--<![endif]-->
     </div>
-    <div id="root"></div>
+    <div id="root">
+      <% Rails.application.config.route_info[:manifest]['static/media/spinner.svg'] %>
+    </div>
     <div id="noscript" style="display:none">
       <h1>OOPS! YOU&apos;VE DISABLED JAVASCRIPT</h1>
       <p>This website runs on ReactJS, a framework that relies on JavaScript to function.</p>

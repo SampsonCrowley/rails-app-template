@@ -20,32 +20,29 @@ exports[`Components - Header::Links is snapshotable 1`] = `
     className="header-menu-wrapper"
   >
     <a
-      className="header-link"
-      href="/"
+      className="header-link "
+      href="/test"
       onClick={[Function]}
     >
-      Home Page
+      TEST
     </a>
     <a
-      className="header-link"
-      href="/developers/1"
+      className="header-link "
+      href="/test/2"
       onClick={[Function]}
     >
-      Test Page
+      TEST 2
     </a>
     <a
-      className="header-link"
-      href="/pages/54326"
+      className="header-link "
+      href="/test/3"
       onClick={[Function]}
     >
-      Test Resource Page
-    </a>
-    <a
-      className="header-link"
-      href="/alternate"
-      onClick={[Function]}
-    >
-      Test Aliased Page
+      <div>
+        <h1>
+          TEST 3
+        </h1>
+      </div>
     </a>
   </div>
 </div>
