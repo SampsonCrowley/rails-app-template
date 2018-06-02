@@ -1,4 +1,4 @@
-import React, {createContext, forwardRef} from 'react'
+import React, {createContext} from 'react'
 import {func, bool} from 'prop-types'
 export const menuContextStates = {
   checked: true,
@@ -20,14 +20,6 @@ export function withMenuContext(Component) {
       {menuProps => <Component {...props} {...menuProps} />}
     </MenuConsumer>
   )
-}
-
-export function withRefMenuContext(Component) {
-  return forwardRef((props, ref) => (
-    <MenuConsumer>
-      {menuProps => <Component {...props} {...menuProps} ref={ref} />}
-    </MenuConsumer>
-  ))
 }
 
 export const withMenuPropTypes = {
