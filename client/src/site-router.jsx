@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Site from './layouts/site';
-import HomePage from './pages/home';
-import NotFound from './pages/not-found';
+import routes from 'routes'
 import {MenuProvider, menuContextStates} from './contexts/menu';
+import AppointmentProvider from 'contexts/appointment';
+
+console.log(routes)
 
 export default class SiteRouter extends Component {
   constructor(props){
@@ -31,16 +33,19 @@ export default class SiteRouter extends Component {
   }
   render () {
     return (
-      <MenuProvider value={this.state}>
-        <Router>
-          <Site>
-            <Switch>
-              <Route path='/' exact component={HomePage} />
-              <Route component={NotFound} />
-            </Switch>
-          </Site>
-        </Router>
-      </MenuProvider>
+      <AppointmentProvider>
+        <MenuProvider value={this.state}>
+          <Router>
+            <Site>
+              <Switch>
+                {
+                  routes.map((route, i) => <Route key={i} {...route}/>)
+                }
+              </Switch>
+            </Site>
+          </Router>
+        </MenuProvider>
+      </AppointmentProvider>
     )
   }
 }

@@ -19,14 +19,12 @@ class NotFoundPage extends Component {
           <Link to="/">Click Here to Return to the Home Page</Link>
         </p>
         <Ball.Atom
+          className="la-vh-half"
           style={{
-            height: '500px',
-            width: '500px',
-            maxHeight: '100vh',
-            maxWidth: '100vw',
             marginLeft: 'auto',
             marginRight: 'auto',
             color: '#00F',
+            margin: '25vh auto'
           }}
         />
       </section>

@@ -1,4 +1,4 @@
-import Routes from 'routes.json'
+import Routes from 'routes/routes.json'
 
 class RouteParser {
 

@@ -1,0 +1,76 @@
+.rbc-calendar {
+  min-height: 500px;
+  min-height: 75vh;
+  border-collapse: collapse;
+}
+.rbc-calendar .rbc-month-row,
+.rbc-calendar .rbc-allday-cell,
+.rbc-calendar .rbc-day-slot,
+.rbc-calendar .rbc-month-row *,
+.rbc-calendar .rbc-allday-cell *,
+.rbc-calendar .rbc-day-slot * {
+  touch-action: none;
+}
+.rbc-calendar .rbc-time-gutter {
+  touch-action: auto;
+}
+.rbc-calendar .rbc-label {
+  font-size: 14px;
+}
+.rbc-calendar .rbc-toolbar {
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+@media screen and (max-width: 767px) {
+  .rbc-calendar .rbc-toolbar {
+    flex-flow: column;
+  }
+  .rbc-calendar .rbc-toolbar .rbc-toolbar-label {
+    padding: 0.5rem;
+  }
+}
+.rbc-calendar .rbc-day-slot .rbc-timeslot-group .rbc-time-slot:first-child {
+  border-bottom: 1px solid #ddd;
+}
+.rbc-calendar .rbc-event-content {
+  flex: 10;
+}
+.rbc-calendar .rbc-addons-dnd-resize-ns-anchor {
+  height: 10px;
+}
+.rbc-calendar .rbc-addons-dnd-resizable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rbc-day-slot .rbc-calendar .rbc-addons-dnd-resizable {
+  flex-flow: column;
+}
+.rbc-row-segment .rbc-calendar .rbc-addons-dnd-resizable {
+  flex-flow: row;
+}
+.rbc-calendar .rbc-addons-dnd-resizable .rbc-addons-dnd-resize-ew-anchor,
+.rbc-calendar .rbc-addons-dnd-resizable .rbc-addons-dnd-resize-ns-anchor {
+  flex: 1;
+  position: relative;
+  top: unset;
+  left: unset;
+}
+.rbc-calendar .rbc-addons-dnd-resizable .rbc-addons-dnd-resize-ew-anchor .rbc-addons-dnd-resize-ew-icon,
+.rbc-calendar .rbc-addons-dnd-resizable .rbc-addons-dnd-resize-ns-anchor .rbc-addons-dnd-resize-ew-icon {
+  border: none;
+}
+.rbc-calendar .rbc-addons-dnd-resizable .rbc-addons-dnd-resize-ew-anchor:first-child > .rbc-addons-dnd-resize-ew-icon,
+.rbc-calendar .rbc-addons-dnd-resizable .rbc-addons-dnd-resize-ns-anchor:first-child > .rbc-addons-dnd-resize-ew-icon {
+  border-left: 3px double;
+}
+.rbc-calendar .rbc-addons-dnd-resizable .rbc-addons-dnd-resize-ew-anchor:last-child .rbc-addons-dnd-resize-ew-icon,
+.rbc-calendar .rbc-addons-dnd-resizable .rbc-addons-dnd-resize-ns-anchor:last-child .rbc-addons-dnd-resize-ew-icon {
+  border-right: 3px double;
+}
+.rbc-calendar .rbc-day-slot .rbc-addons-dnd-resizable {
+  flex-flow: column;
+}
+.rbc-calendar .rbc-row-segment .rbc-addons-dnd-resizable {
+  flex-flow: row;
+}

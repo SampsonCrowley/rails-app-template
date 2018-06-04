@@ -1,0 +1,62 @@
+.rbc-calendar
+  min-height: 500px
+  min-height: 75vh
+  border-collapse: collapse
+  .rbc-month-row
+  .rbc-allday-cell
+  .rbc-day-slot
+    &, *
+      touch-action: none;
+
+  .rbc-time-gutter
+    touch-action: auto
+  .rbc-label
+    font-size: 14px;
+
+  .rbc-toolbar
+    flex-flow: row nowrap
+    justify-content: center
+
+    @media screen and (max-width: 767px)
+      flex-flow: column
+
+      .rbc-toolbar-label
+        padding: .5rem
+
+  .rbc-day-slot
+    .rbc-timeslot-group
+      .rbc-time-slot:first-child
+        border-bottom: 1px solid #DDD
+
+
+  .rbc-event-content
+    flex: 10
+  .rbc-addons-dnd-resize-ns-anchor
+    height: 10px
+
+  .rbc-addons-dnd-resizable
+    display: flex
+    justify-content: space-between
+    align-items: center
+    .rbc-day-slot &
+      flex-flow: column;
+    .rbc-row-segment &
+      flex-flow: row
+    .rbc-addons-dnd-resize-ew-anchor
+    .rbc-addons-dnd-resize-ns-anchor
+      flex: 1
+      position:relative
+      top:unset
+      left:unset
+      .rbc-addons-dnd-resize-ew-icon
+        border: none
+      &:first-child > .rbc-addons-dnd-resize-ew-icon
+        border-left: 3px double
+      &:last-child .rbc-addons-dnd-resize-ew-icon
+        border-right: 3px double
+
+  .rbc-day-slot .rbc-addons-dnd-resizable
+    flex-flow: column
+
+  .rbc-row-segment .rbc-addons-dnd-resizable
+    flex-flow: row
