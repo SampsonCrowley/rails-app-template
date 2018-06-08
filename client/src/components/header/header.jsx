@@ -14,8 +14,7 @@ import './header.css';
 
 const resizeEvents = ['orientationchange', 'resize']
 
-@withRouter
-export default class Header extends Component {
+class Header extends Component {
   static propTypes = {
     title: node,
     navClass: string,
@@ -102,3 +101,5 @@ export default class Header extends Component {
     )
   }
 }
+
+export default withRouter(Header)

@@ -4,7 +4,7 @@
   "license": "MIT",
   "engines": {
     "node": "10.1.0",
-    "yarn": "1.6.0"
+    "yarn": "1.7.0"
   },
   "scripts": {
     "build": "yarn compile && yarn deploy && yarn routes && rm public/index.html",

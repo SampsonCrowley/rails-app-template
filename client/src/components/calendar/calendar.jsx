@@ -20,8 +20,7 @@ BigCalendar.momentLocalizer(moment)
 // @DragDropContext(HTML5Backend)
 
 /** Main Event Calendar Component */
-@withAppointmentContext
-export default class Calendar extends Component {
+class Calendar extends Component {
   /**
    * @type {object}
    * @property {object} appointmentState - redux state for appointments
@@ -125,3 +124,5 @@ export default class Calendar extends Component {
     </DisplayOrLoading>)
   }
 }
+
+export default withAppointmentContext(Calendar)

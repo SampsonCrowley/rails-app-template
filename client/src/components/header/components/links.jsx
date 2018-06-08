@@ -4,8 +4,7 @@ import { withMenuContext, withMenuPropTypes } from 'contexts/menu'
 
 import Link from 'components/link'
 
-@withMenuContext
-export default class HeaderLinks extends Component {
+class HeaderLinks extends Component {
   static propTypes = {
     ...withMenuPropTypes,
     links: arrayOf(shape({
@@ -29,3 +28,5 @@ export default class HeaderLinks extends Component {
     </div>)
   }
 }
+
+export default withMenuContext(HeaderLinks)

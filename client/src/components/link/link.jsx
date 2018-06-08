@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import { withMenuContext, withMenuPropTypes } from 'contexts/menu'
 
-@withMenuContext
-export default class CloserLink extends Component {
+class CloserLink extends Component {
   static propTypes = {
     to: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
@@ -17,3 +16,5 @@ export default class CloserLink extends Component {
     return <Link onClick={closeMenu} to={to} {...props}>{children}</Link>
   }
 }
+
+export default withMenuContext(CloserLink)

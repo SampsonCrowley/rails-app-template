@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Ball} from 'load-awesome-react-components'
+import Ball from 'load-awesome-react-components/dist/ball'
 
 import Link from 'components/link';
 

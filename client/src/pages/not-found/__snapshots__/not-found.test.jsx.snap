@@ -19,16 +19,13 @@ exports[`Pages - NotFound is snapshotable 1`] = `
     </a>
   </p>
   <div
-    className="la-ball-atom la-2x "
+    className="la-ball-atom la-vh-half"
     style={
       Object {
         "color": "#00F",
-        "height": "500px",
+        "margin": "25vh auto",
         "marginLeft": "auto",
         "marginRight": "auto",
-        "maxHeight": "100vh",
-        "maxWidth": "100vw",
-        "width": "500px",
       }
     }
   >

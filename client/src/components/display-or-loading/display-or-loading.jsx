@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { Ball } from 'load-awesome-react-components'
+import Ball from 'load-awesome-react-components/dist/ball'
 
 export default class DisplayOrLoading extends Component {
   static propTypes = {
@@ -17,10 +17,10 @@ export default class DisplayOrLoading extends Component {
    * @returns {ReactElement} markup
    */
   render() {
-    const {children, display, childStyle = {}, childClassName = '', message = 'SUBMITTING...'} = this.props
+    const {children: Children, display, childStyle = {}, childClassName = '', message = 'SUBMITTING...'} = this.props
     return display ? (
       <Fragment>
-        { children }
+        { (childClassName || childStyle) ? <Children className={childClassName} style={childStyle} /> : Children }
       </Fragment>
     ) : (
       <div style={{display: (display ? 'none' : 'block'), width: '100%'}}>
