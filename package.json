@@ -9,7 +9,7 @@
   "scripts": {
     "build": "yarn compile && yarn deploy && yarn routes && rm public/index.html",
     "compile": "yarn --cwd client install && yarn --cwd client build",
-    "routes": "cp -a client/src/routes.json public/routes.json",
+    "routes": "cp -a client/src/routes/routes.json public/routes.json",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "yarn build"
   }
