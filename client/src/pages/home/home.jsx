@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import Ball from 'load-awesome-react-components/dist/ball'
+import Atom from 'load-awesome-react-components/dist/ball/atom'
+import 'load-awesome-react-components/dist/ball/atom.css'
 
 class HomePage extends Component {
   render() {
     return (
       <div className="Site-intro" style={{height: '1000vh'}}>
-        <Ball.Atom
+        <Atom
+          className='la-vh'
           style={{
-            height: '1000px',
-            width: '1000px',
-            maxHeight: '50vh',
-            maxWidth: '100vw',
             marginLeft: 'auto',
             marginRight: 'auto',
             color: '#00F',
+            zIndex:0
           }}
         />
       </div>

@@ -39,8 +39,7 @@ describe('Contexts - Menu', () => {
   })
 
   it('exports a HOC', () => {
-    @withMenuContext
-    class AssertHasContext extends Component {
+    class WithContextClass extends Component {
       constructor(props){
         super(props)
         expect(props.checked).toBe(true)
@@ -49,6 +48,8 @@ describe('Contexts - Menu', () => {
         return 'TEST'
       }
     }
+
+    const AssertHasContext = withMenuContext(WithContextClass)
 
     class AssertHasNoContext extends Component {
       constructor(props){

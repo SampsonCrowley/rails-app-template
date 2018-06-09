@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pages - Calendar is snapshotable 1`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+      "width": "100%",
+    }
+  }
+>
+  <h1
+    className="text-center"
+  >
+    SUBMITTING...
+  </h1>
+  <div
+    className="la-ball-atom "
+    style={
+      Object {
+        "color": "#00F",
+        "height": "1000px",
+        "marginLeft": "auto",
+        "marginRight": "auto",
+        "maxHeight": "50vh",
+        "maxWidth": "100vw",
+        "width": "1000px",
+      }
+    }
+  >
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+</div>
+`;

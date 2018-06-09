@@ -8,13 +8,13 @@ describe('Pages - Home', () => {
   const div = document.createElement('div');
   const createHome = ({...props}) => {
     ReactDOM.render(<Home {...props} />, div);
-    return div.querySelector('p')
+    return div.querySelector('div.Site-intro')
   }
 
-  it('renders an paragraph tag', () => {
+  it('renders an div with class "Site-intro"', () => {
     const rendered = createHome()
     expect(rendered).toBeTruthy()
-    expect(rendered.tagName).toBe("P")
+    expect(rendered.tagName).toBe("DIV")
     ReactDOM.unmountComponentAtNode(div);
   })
 

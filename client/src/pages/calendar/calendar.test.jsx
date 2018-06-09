@@ -1,34 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
+import AppointmentProvider from 'contexts/appointment';
 
 import Calendar from './calendar';
 
 describe('Pages - Calendar', () => {
   const div = document.createElement('div');
   const createCalendar = ({...props}) => {
-    ReactDOM.render(<Calendar {...props} />, div);
+    ReactDOM.render(
+      <AppointmentProvider>
+        <Calendar {...props} />
+      </AppointmentProvider>
+      , div);
     return div.querySelector('p')
   }
 
-  it('renders an paragraph tag', () => {
-    const rendered = createCalendar()
-    expect(rendered).toBeTruthy()
-    expect(rendered.tagName).toBe("P")
-    ReactDOM.unmountComponentAtNode(div);
-  })
-
-  it('sets an unnecessarily tall height', () => {
-    const rendered = renderer
-      .create(<Calendar />)
-      .toJSON();
-    expect(rendered.props.style)
-    expect(rendered.props.style.height).toBe('1000vh')
-  })
-
   it('is snapshotable', () => {
     const tree = renderer
-      .create(<Calendar />)
+      .create(
+        <AppointmentProvider>
+          <Calendar />
+        </AppointmentProvider>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot()
   })

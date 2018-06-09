@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Ball from 'load-awesome-react-components/dist/ball'
+import Atom from 'load-awesome-react-components/dist/ball/atom'
+import 'load-awesome-react-components/dist/ball/atom.css'
 
 import Link from 'components/link';
 
@@ -18,7 +19,7 @@ class NotFoundPage extends Component {
         <p>
           <Link to="/">Click Here to Return to the Home Page</Link>
         </p>
-        <Ball.Atom
+        <Atom
           className="la-vh-half"
           style={{
             marginLeft: 'auto',
