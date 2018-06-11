@@ -42,7 +42,7 @@ class Site extends Component {
 
   handleScroll = () => {
     return () => {
-      const height = (this.state.height || documentHeight()) / 4
+      const height = (this.state.height || (documentHeight() / 4))
       if((this.state.navClass === 'nav-unstuck') && (window.scrollY > height)) this.setState({navClass: 'nav-stuck'})
       else if((this.state.navClass === 'nav-stuck') && (window.scrollY < (height + 1))) this.setState({navClass: 'nav-unstuck'})
 
@@ -56,7 +56,7 @@ class Site extends Component {
   render() {
     return (
       <section className="Site">
-        <Header navClass={this.state.navClass} heightRef={(height) => this.setState({height})}/>
+        <Header navClass={this.state.navClass} heightRef={(height) => this.setState({height}, this.bindScroll)}/>
         <main className="Site-main">
           {this.props.children}
         </main>
