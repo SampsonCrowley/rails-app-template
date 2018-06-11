@@ -19,12 +19,12 @@ class MoneyType < ActiveRecord::Type::Value
       if (!value.kind_of?(Numeric))
         begin
           dollars_to_cents = (value.gsub(/\$/, '').presence || 0).to_d * 100
-          MoneyInteger.new(dollars_to_cents.to_i)
+          StoreAsInt.money(dollars_to_cents.to_i)
         rescue
-          MoneyInteger.new
+          StoreAsInt::Money.new
         end
       else
-        MoneyInteger.new(value)
+        StoreAsInt.money(value)
       end
     end
 end

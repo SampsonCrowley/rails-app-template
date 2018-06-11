@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+git checkout -b temp
+
+bin/dev_setup
+echo 'config/credentials.yml.enc' >> .gitignore
+git add -A
+git commit -am "push to heroku"
+git push heroku +temp:master
+git checkout master
+branch -D temp

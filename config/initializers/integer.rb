@@ -1,5 +1,5 @@
 class Integer
   def cents
-    MoneyInteger.new(self)
+    StoreAsInt.money(self)
   end
 end
