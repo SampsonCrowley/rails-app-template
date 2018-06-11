@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
         <meta name="twitter:title" content="#{title}">
         <meta name="twitter:description" content="#{path_data[:description].to_s}">
         #{path_data[:image].present? ? %Q(<meta name="twitter:image" content="#{route_info[:domain].to_s}/#{path_data[:image].to_s}">) : ''}
-      )
+      ).html_safe
     end
 
     def path_data(data = nil)

@@ -6,5 +6,6 @@ echo 'config/credentials.yml.enc' >> .gitignore
 git add -A
 git commit -am "push to heroku"
 git push heroku +temp:master
+bin/reset
 git checkout master
-branch -D temp
+git branch -D temp
