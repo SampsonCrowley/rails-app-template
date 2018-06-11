@@ -5,11 +5,14 @@ git checkout -b temp
 bin/dev_setup
 cp -a .gitignore .gitignore.tmp
 echo 'config/credentials.yml.enc' >> .gitignore
+echo '3mHXIHXrmrm+eL2+3rj42LXCuAEQmQRGvYBNLJTbHdC2DkOB06yDRH9f5ijYj8yPNCBMR8Ao25yunSGkrBmp5GwO0MVqEGQKJ/ZYymBnFZJ1FOWwfGuEN7ruCRwiEVpc0yobBSL1yjNFF1+Ziuow3CjujJyQniCrk1BWFmtrorODUIri02gKwlnM2Ju5TS/dxXr2PMxgfsG58VDzwtfYu12nedmWqTaUte4OF3ryS64VqxyUPgB1bRy5h53JFG7Es62mmKbV7n5N0q2Yj9ZJDgxIWsoVPXgnBHabJBCKrzsGatdRMF754doDjz9gBE77W4a81kh7lqzcaWaEnZ0FlZ4pjYrZpdlKZslyHOJ1Z80q7JUgfT87pTNvL9SnZ0Je8JT/bglDmJWRJiiDYJMgekXdiZB9LclhFSDY--4/pc1W11VT1Du5XF--iJNkMZwHCoC4GEsgfd+F/w==' > config/credentials.yml.enc
+git add config/credentials.yml.enc
 git add -A
 git commit -am "push to heroku"
 git push heroku +temp:master
 mv .gitignore.tmp .gitignore
 bin/reset
 
+git stash
 git checkout master
 git branch -D temp
