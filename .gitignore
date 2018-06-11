@@ -42,4 +42,3 @@
 *.log*
 *.rdb
 !Gemfile.lock
-config/credentials.yml.enc

@@ -15,6 +15,8 @@ Devise.setup do |config|
     rescue
       config.secret_key = Rails.application.secret_key_base || 'abc1234abc1234'
     end
+  else
+    config.secret_key = Rails.application.credentials.secret_key_base
   end
 
   # ==> Controller configuration
