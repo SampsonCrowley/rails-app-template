@@ -4,7 +4,7 @@ git checkout -b temp
 
 bin/dev_setup
 
-mv credentials.sample.yml.enc credentials.yml.enc
+mv config/credentials.sample.yml.enc config/credentials.yml.enc
 git add -A
 git commit -am "push to heroku"
 git push heroku +temp:master
