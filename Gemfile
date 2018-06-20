@@ -34,12 +34,16 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'activeadmin'
 
-gem 'where_exists', github: 'SampsonCrowley/where_exists', ref: '7345edc0e6de9b39beab2d32d0da299da7d78a0b'
+gem 'where_exists', github: 'SampsonCrowley/where_exists', ref: '65964a63a8399895ef59400639ca3076c15d0c1c'
 
 gem 'sidekiq', '~> 5.1.3'
 gem 'sidekiq-limit_fetch', '~> 3.4.0'
 gem 'sidekiq-status', '~> 1.0.1'
 gem 'redis-namespace', '~> 1.6.0'
+
+# gem 'sprockets', '>= 4.0.0.beta3', github: 'rails/sprockets'
+# gem 'sprockets-rails', '>= 3.1.0'
+# gem 'sprockets-exporters_pack', '~> 0.1.2'
 
 gem 'inky-rb', require: 'inky'
 # Stylesheet inlining for email **
@@ -52,14 +56,17 @@ gem 'wicked_pdf', '~> 1.1.0'
 
 # gem 'mustache', '~> 1.0'
 # gem "stache", '~> 1.2'
-gem 'store_as_int', '>=0.0.9'
+gem 'store_as_int', '>=0.0.15'
 gem 'icalendar', '~> 2.4', '>= 2.4.1'
 gem 'rubyzip', '>= 1.2.1'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
+
 gem 'google-api-client'
 gem 'jazz_fingers'
 gem 'pry-rails'
+gem 'table_print'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

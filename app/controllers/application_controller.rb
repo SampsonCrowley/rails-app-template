@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :get_meta_data, except: [:oembed]
+  before_action :get_meta_data, except: [:oembed, :serve_asset]
 
   def oembed
     path = params[:url].split(/.*?\/\/.*\//)[1]
@@ -17,7 +17,50 @@ class ApplicationController < ActionController::Base
     render html: '', layout: true
   end
 
+  def serve_asset
+    cleaned = "#{request.path}".sub(/^\//, '').gsub('../', '').gsub(/[\?\*]/, '')
+    file = Rails.root.join('public', cleaned).to_s
+    if File.exist?(file)
+      encodings = {}
+      request.headers['HTTP_ACCEPT_ENCODING'].to_s.split(',').map {|h| encodings[h.strip.downcase.to_sym] = true }
+
+      response.headers['Content-Type'] = case file.split('.').last
+      when 'css'
+        'text/css'
+      when 'js'
+        'application/javascript; charset=utf-8'
+      when 'json'
+        'application/json; charset=utf-8'
+      else
+        `file --b --mime-type '#{file}'`.strip
+      end
+
+      case
+      when encodings[:br] || encodings[:brotli]
+        response.headers['Content-Encoding'] = 'br'
+        file = "#{file}.br"
+      when encodings[:gz] || encodings[:gzip]
+        response.headers['Content-Encoding'] = 'gzip'
+        file = "#{file}.gz"
+      end
+
+      send_file file, type: response.headers['Content-Type'], disposition: 'inline'
+    end
+  end
+
+  rescue_from ActiveRecord::RecordNotFound, :with => :rescue_action_in_public
+
   private
+    # handles 404 when an asset is not found.
+    def rescue_action_in_public(exception)
+      case exception
+      when ActiveRecord::RecordNotFound, ActionController::UnknownAction, ActionController::RoutingError
+        render render html: '', layout: true, :status => 404
+      else
+        super
+      end
+    end
+
     def get_meta_data
       @meta_data ||= {
         title: title,

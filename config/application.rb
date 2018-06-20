@@ -24,23 +24,28 @@ module DefaultAppName
     # config.time_zone = 'Mountain Time (US & Canada)'
     config.active_record.default_timezone = :utc
     config.eager_load_paths += Dir["#{config.root}/lib/modules/**/"]
+    # uncomment line below to split routes into multiple files
     # config.autoload_paths += %W(#{config.root}/config/routes)
     config.active_record.schema_format = :sql
     config.active_job.queue_adapter = :sidekiq
-    config.generators.stylesheets = false
-    config.generators.javascripts = false
+    config.generators do |g|
+      g.assets false
+    end
 
     base_path = Rails.root.join('public')
+
     unparsed = (File.exist?(base_path.join('routes.json')) ? JSON.parse(File.read(base_path.join('routes.json'))) : {}).to_h.deep_symbolize_keys
+
     config.route_info = {
       domain: unparsed[:domain].presence || 'https://lvh.me',
       links: unparsed[:links].presence || {}
     }
 
     unparsed = (File.exist?(base_path.join('asset-manifest.json')) ? JSON.parse(File.read(base_path.join('asset-manifest.json'))) : {}).to_h.deep_symbolize_keys
-
     config.route_info[:manifest] = (unparsed.presence || {}).deep_stringify_keys
+
     unparsed = {}
+
     config.route_info[:manifest].each do |k, v|
       unparsed[k.sub(/static\/.*?\//, '')] = v
     end

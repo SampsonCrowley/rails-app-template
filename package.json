@@ -7,10 +7,10 @@
     "yarn": "1.7.0"
   },
   "scripts": {
-    "build": "yarn compile && yarn deploy && yarn routes && rm public/index.html",
+    "build": "yarn compile && yarn deploy && yarn routes && rm public/index.htm*",
     "compile": "yarn --cwd client install && yarn --cwd client build",
     "routes": "cp -a client/src/routes/routes.json public/routes.json",
-    "deploy": "cp -a client/build/. public/",
+    "deploy": "echo 'HELLO' && rm -rf public/static/* && cp -a client/build/. public/",
     "heroku-postbuild": "yarn build"
   }
 }

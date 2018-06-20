@@ -6,6 +6,7 @@
   "dependencies": {
     "autoprefixer": "8.6.1",
     "autoprefixer-stylus": "^0.14.0",
+    "brotli": "^1.3.2",
     "load-awesome-react-components": "^1.0.9",
     "load-awesome-relative": "^0.0.3",
     "moment": "^2.22.2",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "babel-helpers": "^6.24.1",
+    "jest": "^23.1.0",
     "react-test-renderer": "^16.4.0"
   },
   "engines": {
@@ -27,11 +29,12 @@
     "yarn": "1.7.0"
   },
   "scripts": {
+    "build": "yarn styles && react-scripts build && yarn compress",
+    "compress": "node scripts/compress-build run",
+    "eject": "react-scripts eject",
+    "start": "yarn styles:watch & react-scripts start",
     "styles": "stylus -u nib ./src/**/**/*.styl",
     "styles:watch": "stylus -u nib -w ./src/**/**/*.styl",
-    "start": "yarn styles:watch & react-scripts start",
-    "build": "yarn styles && react-scripts build",
-    "test": "yarn styles && react-scripts test --env=jsdom --no-cache",
-    "eject": "react-scripts eject"
+    "test": "yarn styles && react-scripts test --env=jsdom --no-cache"
   }
 }
