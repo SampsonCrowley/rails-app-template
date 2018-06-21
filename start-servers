@@ -2,4 +2,4 @@
 
 export $(cat .env | xargs)
 export RAILS_ENV=production
-forego start -f Procfile.prod
+forego start -f Procfile.prod -p "${PORT:-3000}"

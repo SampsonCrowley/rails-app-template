@@ -24,16 +24,9 @@ class ApplicationController < ActionController::Base
       encodings = {}
       request.headers['HTTP_ACCEPT_ENCODING'].to_s.split(',').map {|h| encodings[h.strip.downcase.to_sym] = true }
 
-      response.headers['Content-Type'] = case file.split('.').last
-      when 'css'
-        'text/css'
-      when 'js'
-        'application/javascript; charset=utf-8'
-      when 'json'
-        'application/json; charset=utf-8'
-      else
+      response.headers['Content-Type'] =
+        mime_types[file.split('.').last.downcase] ||
         `file --b --mime-type '#{file}'`.strip
-      end
 
       case
       when encodings[:br] || encodings[:brotli]
@@ -59,6 +52,15 @@ class ApplicationController < ActionController::Base
       else
         super
       end
+    end
+
+    def mime_types
+      @mime_types ||= {
+        css: 'text/css',
+        js: 'application/javascript; charset=utf-8',
+        json: 'application/json; charset=utf-8',
+        svg: 'image/svg+xml; charset=utf-8',
+      }
     end
 
     def get_meta_data
