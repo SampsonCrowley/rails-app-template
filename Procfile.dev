@@ -1,4 +1,4 @@
-node: yarn --cwd client start -p 3000
-rails: bundle exec rails s -p 3001
+node: yarn --cwd client start
+rails: bundle exec rails s
 queue: bin/run_queue
 redis: redis-server

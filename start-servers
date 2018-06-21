@@ -2,5 +2,4 @@
 
 export $(cat .env | xargs)
 export RAILS_ENV=production
-export RAILS_SERVE_STATIC_FILES=true
 forego start -f Procfile.prod

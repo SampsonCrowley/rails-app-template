@@ -7,7 +7,7 @@ class HomePage extends Component {
     return (
       <div className="Site-intro" style={{height: '1000vh'}}>
         <Atom
-          className='la-vh'
+          className='la-vw-half'
           style={{
             marginLeft: 'auto',
             marginRight: 'auto',

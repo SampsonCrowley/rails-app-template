@@ -20,7 +20,7 @@ class NotFoundPage extends Component {
           <Link to="/">Click Here to Return to the Home Page</Link>
         </p>
         <Atom
-          className="la-vh-half"
+          className="la-vw-half la-vh-half"
           style={{
             marginLeft: 'auto',
             marginRight: 'auto',

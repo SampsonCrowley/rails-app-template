@@ -9,4 +9,4 @@ export $(cat .env | xargs)
 # fi
 
 # echo $PROCFILE
-forego start -f Procfile.dev
+forego start -f Procfile.dev -p "${PORT-3000}"

@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:3100",
   "dependencies": {
     "autoprefixer": "8.6.1",
     "autoprefixer-stylus": "^0.14.0",
