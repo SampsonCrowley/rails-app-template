@@ -23,10 +23,16 @@ class RouteParser {
       console.log(regex, id, location.pathname.match(regex))
 
       if(this.current.api && id){
-        const result = await fetch(this.current.api + id),
-              resource = await result.json()
-        id = resource[this.current.method || 'title']
+        if((`${id}`.toLowerCase() === 'new')) {
+          id = 'New'
+        } else {
+          const result = await fetch(this.current.api + id),
+                resource = await result.json()
+          id = resource[this.current.method || 'title']
+        }
       }
+      id = id || 'Index'
+
       this.title = this.current.title.replace(/%RESOURCE%/, id)
     }
 
