@@ -6,6 +6,36 @@ class ApplicationRecord < ActiveRecord::Base
     @@queue_adapter == :inline
   end
 
+  def self.transaction(*args)
+    super(*args) do
+      if Current.user
+        ip = Current.ip_address ? "'#{Current.ip_address}'" : 'NULL'
+
+        ActiveRecord::Base.connection.execute <<-SQL
+          CREATE TEMP TABLE IF NOT EXISTS
+            "_app_user" (user_id integer, user_type text, ip_address inet);
+
+          UPDATE
+            _app_user
+          SET
+            user_id=#{Current.user.id},
+            user_type='#{Current.user.class.to_s}',
+            ip_address=#{ip};
+
+          INSERT INTO
+            _app_user (user_id, user_type, ip_address)
+          SELECT
+            #{Current.user.id},
+            '#{Current.user.class.to_s}',
+            #{ip}
+          WHERE NOT EXISTS (SELECT * FROM _app_user);
+        SQL
+      end
+
+      yield
+    end
+  end
+
   def queue_adapter_inline?
     self.class.queue_adapter_inline?
   end

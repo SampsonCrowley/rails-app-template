@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {arrayOf, shape, string, node} from 'prop-types';
-import { withMenuContext, withMenuPropTypes } from 'contexts/menu'
+import { Menu } from 'contexts/menu'
 
 import Link from 'components/link'
 
 class HeaderLinks extends Component {
   static propTypes = {
-    ...withMenuPropTypes,
+    ...Menu.PropTypes,
     links: arrayOf(shape({
       to: string,
       children: node
@@ -14,9 +14,9 @@ class HeaderLinks extends Component {
   }
 
   render() {
-    const {menuChecked, toggleMenu, links = []} = this.props;
+    const {menuState:{menuOpen}, menuActions: {toggleMenu}, links = []} = this.props;
     return (<div className="header-menu">
-      <input type="checkbox" id="nav-trigger" className='nav-trigger' checked={menuChecked} />
+      <input type="checkbox" id="nav-trigger" className='nav-trigger' checked={!!menuOpen} />
       <label htmlFor="nav-trigger" onClick={toggleMenu}><span></span></label>
       <div className="header-menu-wrapper">
         {
@@ -29,4 +29,4 @@ class HeaderLinks extends Component {
   }
 }
 
-export default withMenuContext(HeaderLinks)
+export default Menu.Decorator(HeaderLinks)

@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components - AppointmentForm is snapshotable 1`] = `
+<div>
+  <div
+    className="row form-group"
+  >
+    <div
+      className="col-sm-6 form-group"
+    >
+      <label
+        htmlFor="start"
+      >
+        Appointment Starting Time
+      </label>
+      <input
+        className="form-control"
+        defaultValue="2018-01-02T00:00"
+        name="start"
+        type="datetime-local"
+      />
+    </div>
+    <div
+      className="col-sm-6 form-group"
+    >
+      <label
+        htmlFor="end"
+      >
+        Appointment Ending Time
+      </label>
+      <input
+        className="form-control"
+        defaultValue="2018-01-02T01:00"
+        name="end"
+        type="datetime-local"
+      />
+    </div>
+  </div>
+  <div
+    className="row form-group"
+  >
+    <div
+      className="col-sm-6 form-group"
+    >
+      <label
+        htmlFor="first"
+      >
+        Patient First Name
+      </label>
+      <input
+        className="form-control"
+        name="first"
+        type="text"
+      />
+    </div>
+    <div
+      className="col-sm-6 form-group"
+    >
+      <label
+        htmlFor="last"
+      >
+        Patient Last Name
+      </label>
+      <input
+        className="form-control"
+        name="last"
+        type="text"
+      />
+    </div>
+  </div>
+  <div
+    className="row form-group"
+  >
+    <div
+      className="col-sm-6 form-group"
+    >
+      <label
+        htmlFor="reason"
+      >
+        Reason For Appointment
+      </label>
+      <input
+        className="form-control"
+        name="reason"
+        type="text"
+      />
+    </div>
+    <div
+      className="col-sm-6 form-group"
+    >
+      <label
+        htmlFor="followup"
+      >
+        Is a Follow Up?
+      </label>
+      <div
+        className="input-group"
+      >
+        <div
+          className="input-group-prepend"
+        >
+          <input
+            checked={false}
+            className="indirect-box"
+            name="followup"
+            type="checkbox"
+            value={1}
+          />
+          <div
+            className="input-group-text text-danger"
+          >
+            X
+          </div>
+        </div>
+        <label
+          className="form-control"
+          onClick={[Function]}
+        >
+          Follow Up
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row form-group"
+  >
+    <div
+      className="col form-group"
+    >
+      <label
+        htmlFor="notes"
+      >
+        Notes
+      </label>
+      <textarea
+        className="form-control"
+        name="notes"
+        rows="5"
+      />
+    </div>
+  </div>
+</div>
+`;

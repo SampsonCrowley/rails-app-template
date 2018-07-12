@@ -18,19 +18,21 @@
       <%= @meta_data[:title] || 'DefaultAppName' %>
     </title>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
     <% Rails.application.config.route_info[:manifest].each do |k, v| %>
       <% if k =~ /\.css$/ %>
         <link href="/<%= v %>" rel="stylesheet">
       <% end %>
     <% end %>
+
+    <!--[if !IE]><!--><style>.ie-only{display:none!important}</style><!--<![endif]-->
+
+    <noscript>
+      <style>#root{display:none!important}#noscript{display:block!important}</style>
+    </noscript>
   </head>
   <body>
-    <noscript>
-      <style>#root{display:none}#noscript{display:block!important}</style>
-    </noscript>
-    <div>
-      <!--[if !IE]><!--><style>.ie-only{display:none!important}</style><!--<![endif]-->
-    </div>
     <div id="root">
       <% Rails.application.config.route_info[:manifest]['static/media/spinner.svg'] %>
     </div>
@@ -39,9 +41,7 @@
       <p>This website runs on ReactJS, a framework that relies on JavaScript to function.</p>
       <p>Please enable JavaScript, then <a href="#" onclick="event.preventDefault?event.preventDefault():event.returnValue=!1,location&&location.reload()">Click Here</a></p>
     </div>
-
     <input type="hidden" id="app-version" value="{{version}}"/>
-
     <% Rails.application.config.route_info[:manifest].each do |k, v| %>
       <% if k =~ /\.js$/ %>
         <script type="text/javascript" src="/<%= v %>"></script>

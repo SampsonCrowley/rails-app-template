@@ -19,7 +19,17 @@ describe('Pages - Calendar', () => {
   it('is snapshotable', () => {
     const tree = renderer
       .create(
-        <AppointmentProvider>
+        <AppointmentProvider
+          value={{
+            appointmentState: {
+              appointments: [],
+              loaded: true
+            },
+            appointmentActions: {
+              getAppointments: async () => []
+            }
+          }}
+        >
           <Calendar />
         </AppointmentProvider>
       )

@@ -35,7 +35,7 @@ export default class ModalEditor extends Component {
    */
   render() {
     const { onClose, changed = false, heading = 'Down Under Sports', loading = false, children } = this.props;
-
+    console.log(children)
     return (
       <div className={`modal-editor ${this.state.active ? 'open' : 'closed'}`}>
         <section className='container-fluid package-wrapper'>
@@ -59,12 +59,16 @@ export default class ModalEditor extends Component {
           <DisplayOrLoading
             display={!(loading)}
             className='row'
-            childClassName="col"
-            childStyle={{height: '100%'}}
             style={{height: '100%'}}>
-            <div className="row overflow-y">
-              <div className="col">
-                {children}
+            <div
+              className="col"
+              style={{height: '100%'}}>
+              <div
+                className="row overflow-y"
+                style={{height: '100%'}}>
+                <div className="col">
+                  {children}
+                </div>
               </div>
             </div>
           </DisplayOrLoading>

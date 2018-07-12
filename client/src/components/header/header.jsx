@@ -3,7 +3,7 @@ import { node, string, object } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import background from 'assets/images/background.svg';
-import {menuContextStates} from 'contexts/menu';
+import { Menu } from 'contexts/menu';
 import debounce from 'helpers/debounce';
 
 import {HeaderLinks, HeaderLogo} from './components'
@@ -24,7 +24,7 @@ class Header extends Component {
   constructor(props){
     super(props)
     this.state = {
-      top: 0
+      top: 0,
     }
     props.history.listen(this.getTitle)
   }
@@ -49,7 +49,7 @@ class Header extends Component {
     const h = ((this.headerEl && this.headerEl.clientHeight) || 0) - ((this.navEl && this.navEl.clientHeight) || 0)
     this.props.heightRef && this.props.heightRef(h)
     this.setState({top: `-${h}px`})
-    menuContextStates.close && menuContextStates.close()
+    this.props.menuActions && this.props.menuActions.closeMenu()
   }
 
   unbind = () => {
@@ -76,6 +76,10 @@ class Header extends Component {
                   children: 'Home Page',
                 },
                 {
+                  to: "/calendar",
+                  children: 'Calendar',
+                },
+                {
                 to: "/developers/1",
                   children: 'Test Page',
                 },
@@ -90,16 +94,20 @@ class Header extends Component {
               ]}
             />
           </nav>
-          <h1 className="Site-title">{this.state.title || (<span>You&apos;re Reacting!</span>)}</h1>
+          <h1 className="Site-title">
+            <HeaderLogo className="top-logo" />
+            {this.state.title || (<span>You&apos;re Reacting!</span>)}
+          </h1>
           {
             this.state.description && (
               <h3 className="Site-subtitle">{this.state.description}</h3>
             )
           }
+
         </div>
       </header>
     )
   }
 }
 
-export default withRouter(Header)
+export default Menu.Decorator(withRouter(Header))

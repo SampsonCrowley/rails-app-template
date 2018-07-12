@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   namespace :api do
-    resources :tasks
+    resources :appointments
     resources :developers
+    resources :tasks
   end
 
   get '*path', to: "application#serve_asset", constraints: ->(request) do

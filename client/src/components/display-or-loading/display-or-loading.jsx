@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import Ball from 'load-awesome-react-components/dist/ball'
+import Atom from 'load-awesome-react-components/dist/ball/atom'
+import 'load-awesome-react-components/dist/ball/atom.css'
 
 export default class DisplayOrLoading extends Component {
   static propTypes = {
@@ -17,7 +18,7 @@ export default class DisplayOrLoading extends Component {
    * @returns {ReactElement} markup
    */
   render() {
-    const {children: Children, display, childStyle = {}, childClassName = '', message = 'SUBMITTING...'} = this.props
+    const {children: Children, display, childStyle, childClassName, message = 'SUBMITTING...'} = this.props
     return display ? (
       <Fragment>
         { (childClassName || childStyle) ? <Children className={childClassName} style={childStyle} /> : Children }
@@ -27,15 +28,13 @@ export default class DisplayOrLoading extends Component {
         <h1 className='text-center'>
           {message}
         </h1>
-        <Ball.Atom
+        <Atom
+          className='la-vw-sm'
           style={{
-            height: '1000px',
-            width: '1000px',
-            maxHeight: '50vh',
-            maxWidth: '100vw',
             marginLeft: 'auto',
             marginRight: 'auto',
             color: '#00F',
+            zIndex:0
           }}
         />
       </div>

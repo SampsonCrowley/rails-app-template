@@ -2,27 +2,31 @@ import React, {createContext, Component} from 'react'
 import {arrayOf, func, instanceOf, shape, string} from 'prop-types'
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment'
 
-
 const eventUrl = `${canUseDOM ? '' : 'http://localhost:4000'}/api/appointments/`
 
-export const defaultState = {
+export const Appointment = {}
+
+Appointment.DefaultValues = {
   appointments: [],
   loaded: false
 }
 
-const AppointmentContext = createContext({...defaultState})
+Appointment.Context = createContext({
+  appointmentState: {...Appointment.DefaultValues},
+  appointmentActions: {
+    getAppointments(){}
+  }
+})
 
-export const {Provider: AppointmentProvider, Consumer: AppointmentConsumer} = AppointmentContext
-
-export function withAppointmentContext(Component) {
+Appointment.Decorator = function withAppointmentContext(Component) {
   return (props) => (
-    <AppointmentConsumer>
-      {menuProps => <Component {...props} {...menuProps} />}
-    </AppointmentConsumer>
+    <Appointment.Context.Consumer>
+      {appointmentProps => <Component {...props} {...appointmentProps} />}
+    </Appointment.Context.Consumer>
   )
 }
 
-export const withAppointmentPropTypes = {
+Appointment.PropTypes = {
   appointmentState: shape({
     appointments: arrayOf(shape({
       start: instanceOf(Date),
@@ -36,11 +40,11 @@ export const withAppointmentPropTypes = {
 }
 
 export default class ReduxAppointmentProvider extends Component {
-  state = { ...defaultState }
+  state = { ...Appointment.DefaultValues }
 
   render() {
     return (
-      <AppointmentProvider
+      <Appointment.Context.Provider
         value={{
           appointmentState: this.state,
           appointmentActions: {
@@ -49,22 +53,12 @@ export default class ReduxAppointmentProvider extends Component {
              **/
             getAppointments: async () => {
               try {
-                const result = await fetch(eventUrl)
-                console.log(result)
-                const {
-                  data: {
-                    data: {
-                      appointments,
-                    },
-                    error
-                  },
-                } = result
-
-                if(error) throw new Error(error)
+                const result = await fetch(eventUrl),
+                      appointments = await result.json()
 
                 const retrieved = appointments.map((event) => ({
-                  start: new Date(event.start),
-                  end: new Date(event.end),
+                  start: new Date(event.starting),
+                  end: new Date(event.ending),
                   title: event.title,
                 }))
 
@@ -77,7 +71,6 @@ export default class ReduxAppointmentProvider extends Component {
                 return [...retrieved]
 
               } catch (e) {
-
                 this.setState({
                   appointments: [],
                   loaded: false
@@ -90,7 +83,7 @@ export default class ReduxAppointmentProvider extends Component {
         }}
       >
         {this.props.children}
-      </AppointmentProvider>
+      </Appointment.Context.Provider>
     )
   }
 }

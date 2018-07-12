@@ -57,7 +57,7 @@ class Site extends Component {
     return (
       <section className="Site">
         <Header navClass={this.state.navClass} heightRef={(height) => this.setState({height}, this.bindScroll)}/>
-        <main className="Site-main">
+        <main className="Site-main container-fluid" style={{maxWidth: '1140px'}}>
           {this.props.children}
         </main>
       </section>

@@ -2,28 +2,14 @@
 
 exports[`Pages - Home is snapshotable 1`] = `
 <div
-  className="Site-intro"
-  style={
-    Object {
-      "height": "1000vh",
-    }
-  }
+  className="HomePage"
 >
-  <div
-    className="la-ball-atom la-vh"
-    style={
-      Object {
-        "color": "#00F",
-        "marginLeft": "auto",
-        "marginRight": "auto",
-        "zIndex": 0,
-      }
-    }
-  >
-    <div />
-    <div />
-    <div />
-    <div />
-  </div>
+  <h3>
+    Here, will be a quick summary of what needs to be done today
+  </h3>
+  <hr />
+  <h4>
+    This page can be cutomized to default to whatever will be most convenient to your team
+  </h4>
 </div>
 `;

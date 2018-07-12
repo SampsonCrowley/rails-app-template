@@ -19,7 +19,7 @@ exports[`Pages - NotFound is snapshotable 1`] = `
     </a>
   </p>
   <div
-    className="la-ball-atom la-vh-half"
+    className="la-ball-atom la-vw-half la-vh-half"
     style={
       Object {
         "color": "#00F",

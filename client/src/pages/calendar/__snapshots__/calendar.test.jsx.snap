@@ -2,36 +2,37 @@
 
 exports[`Pages - Calendar is snapshotable 1`] = `
 <div
-  style={
-    Object {
-      "display": "block",
-      "width": "100%",
-    }
-  }
+  className="CalendarPage"
 >
-  <h1
-    className="text-center"
-  >
-    SUBMITTING...
-  </h1>
   <div
-    className="la-ball-atom "
     style={
       Object {
-        "color": "#00F",
-        "height": "1000px",
-        "marginLeft": "auto",
-        "marginRight": "auto",
-        "maxHeight": "50vh",
-        "maxWidth": "100vw",
-        "width": "1000px",
+        "display": "block",
+        "width": "100%",
       }
     }
   >
-    <div />
-    <div />
-    <div />
-    <div />
+    <h1
+      className="text-center"
+    >
+      SUBMITTING...
+    </h1>
+    <div
+      className="la-ball-atom la-vw-sm"
+      style={
+        Object {
+          "color": "#00F",
+          "marginLeft": "auto",
+          "marginRight": "auto",
+          "zIndex": 0,
+        }
+      }
+    >
+      <div />
+      <div />
+      <div />
+      <div />
+    </div>
   </div>
 </div>
 `;

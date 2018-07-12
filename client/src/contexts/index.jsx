@@ -1,1 +1,7 @@
-export {default as MenuContext, withMenuContext, withRefMenuContext, withMenuPropTypes, menuContextStates} from './menu'
+export Menu from './menu'
+export Appointment from './appointment'
+
+export default const Contexts = {
+  Appointment,
+  Menu
+}

@@ -5,16 +5,16 @@ import BigCalendar from 'react-big-calendar'
 // import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import moment from 'moment'
 
-import AppointmentForm from 'components/appointment-form'
+import AppointmentForm from 'forms/appointment-form'
 import DisplayOrLoading from 'components/display-or-loading'
 import ModalEditor from 'components/modal-editor'
 
-import { withAppointmentContext, withAppointmentPropTypes } from 'contexts/appointment'
+import { Appointment } from 'contexts/appointment'
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './calendar.css'
 
-BigCalendar.momentLocalizer(moment)
+BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
 
 // const DnDCalendar = withDragAndDrop(BigCalendar)
 // @DragDropContext(HTML5Backend)
@@ -27,7 +27,7 @@ class Calendar extends Component {
    * @property {object} appointmentActions - redux actions for appointments
    */
   static propTypes = {
-    ...withAppointmentPropTypes
+    ...Appointment.PropTypes
   }
 
   constructor(props){
@@ -42,7 +42,7 @@ class Calendar extends Component {
    */
   async componentDidMount(){
     try {
-      return await this.props.appointmentState ? Promise.resolve() : this.props.appointmentActions.getAppointments()
+      return await this.props.appointmentState.loaded ? Promise.resolve() : this.props.appointmentActions.getAppointments()
     } catch (e) {
       console.log(e)
     }
@@ -96,7 +96,6 @@ class Calendar extends Component {
    * @returns {ReactElement} BigCalendar - Selectable
    */
   render() {
-    console.log(this.props)
     return (<DisplayOrLoading display={!!this.props.appointmentState.loaded}>
       <BigCalendar
         defaultView='week'
@@ -105,6 +104,7 @@ class Calendar extends Component {
         onSelectEvent={appointment => alert(appointment.title)}
         onSelectSlot={
           slotInfo => {
+            console.log(slotInfo)
             this.setState({
               selected: {
                 start: slotInfo.start,
@@ -113,16 +113,16 @@ class Calendar extends Component {
             })
           }
         }
-        events={this.props.appointments}
+        events={this.props.appointmentState.appointments}
       />
       {!!this.state.selected && <ModalEditor
         heading='Appointment Form'
         onClose={() => this.setState({selected: false})}
       >
-        <AppointmentForm {...this.state.selected}/>
+        <AppointmentForm {...this.state.selected} />
       </ModalEditor>}
     </DisplayOrLoading>)
   }
 }
 
-export default withAppointmentContext(Calendar)
+export default Appointment.Decorator(Calendar)

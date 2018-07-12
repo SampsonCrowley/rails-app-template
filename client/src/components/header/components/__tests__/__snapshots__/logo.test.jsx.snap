@@ -11,7 +11,7 @@ exports[`Components - Header::Logo is snapshotable 1`] = `
   >
     <img
       alt="Site Logo"
-      src="logo.svg"
+      src="dus-logo.png"
     />
   </a>
 </div>
