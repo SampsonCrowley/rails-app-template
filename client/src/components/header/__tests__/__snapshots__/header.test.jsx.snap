@@ -57,6 +57,13 @@ exports[`Components - Header is snapshotable 1`] = `
           </a>
           <a
             className="header-link "
+            href="/calendar"
+            onClick={[Function]}
+          >
+            Calendar
+          </a>
+          <a
+            className="header-link "
             href="/developers/1"
             onClick={[Function]}
           >
@@ -82,6 +89,20 @@ exports[`Components - Header is snapshotable 1`] = `
     <h1
       className="Site-title"
     >
+      <div
+        className="top-logo"
+      >
+        <a
+          className="header-link"
+          href="/"
+          onClick={[Function]}
+        >
+          <img
+            alt="Site Logo"
+            src="logo.svg"
+          />
+        </a>
+      </div>
       <span>
         You're Reacting!
       </span>

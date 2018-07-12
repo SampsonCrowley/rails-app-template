@@ -20,13 +20,11 @@
     "stylus": "^0.54.5"
   },
   "devDependencies": {
-    "babel-helpers": "^6.24.1",
-    "jest": "^23.1.0",
     "react-test-renderer": "^16.4.0"
   },
   "engines": {
-    "node": "10.1.0",
-    "yarn": "1.7.0"
+    "node": ">= 10.1.0",
+    "yarn": ">= 1.7.0"
   },
   "scripts": {
     "build": "yarn styles && react-scripts build && yarn compress",

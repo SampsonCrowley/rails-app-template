@@ -2,14 +2,6 @@
   "domain": "https://default_app_name.com",
   "links": {
     "root": {
-      "title": "Calendar",
-      "path": "calendar",
-      "canonical": "/calendar",
-      "description": "DefaultAppName: Event calendar",
-      "image": "logo.svg",
-      "index": true
-    },
-    "root": {
       "title": "Home",
       "path": "",
       "canonical": "/",
@@ -33,6 +25,14 @@
       "image": "logo.svg",
       "index": true,
       "resource": true
+    },
+    "calendar": {
+      "title": "Calendar",
+      "path": "calendar",
+      "canonical": "/calendar",
+      "description": "DefaultAppName: Event calendar",
+      "image": "logo.svg",
+      "index": true
     },
     "developers": {
       "api": "/api/developers/",

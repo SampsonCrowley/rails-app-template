@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       request.headers['HTTP_ACCEPT_ENCODING'].to_s.split(',').map {|h| encodings[h.strip.downcase.to_sym] = true }
 
       response.headers['Content-Type'] =
-        mime_types[file.split('.').last.downcase] ||
+        mime_types[file.split('.').last.downcase.strip.to_sym] ||
         `file --b --mime-type '#{file}'`.strip
 
       case
@@ -56,9 +56,10 @@ class ApplicationController < ActionController::Base
 
     def mime_types
       @mime_types ||= {
-        css: 'text/css',
+        css: 'text/css; charset=utf-8',
         js: 'application/javascript; charset=utf-8',
         json: 'application/json; charset=utf-8',
+        styl: 'text/css; charset=utf-8',
         svg: 'image/svg+xml; charset=utf-8',
       }
     end
@@ -78,12 +79,6 @@ class ApplicationController < ActionController::Base
         puts route_info
       end
       @title ||= path_data[:title].presence || "DefaultAppName"
-    end
-
-    def oembed
-      @oembed ||= {
-
-      }
     end
 
     def oembed_discovery

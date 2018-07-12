@@ -60,6 +60,13 @@ exports[`Components - Site is snapshotable 1`] = `
             </a>
             <a
               className="header-link "
+              href="/calendar"
+              onClick={[Function]}
+            >
+              Calendar
+            </a>
+            <a
+              className="header-link "
               href="/developers/1"
               onClick={[Function]}
             >
@@ -85,6 +92,20 @@ exports[`Components - Site is snapshotable 1`] = `
       <h1
         className="Site-title"
       >
+        <div
+          className="top-logo"
+        >
+          <a
+            className="header-link"
+            href="/"
+            onClick={[Function]}
+          >
+            <img
+              alt="Site Logo"
+              src="logo.svg"
+            />
+          </a>
+        </div>
         <span>
           You're Reacting!
         </span>
@@ -92,7 +113,12 @@ exports[`Components - Site is snapshotable 1`] = `
     </div>
   </header>
   <main
-    className="Site-main"
+    className="Site-main container-fluid"
+    style={
+      Object {
+        "maxWidth": "1140px",
+      }
+    }
   />
 </section>
 `;
