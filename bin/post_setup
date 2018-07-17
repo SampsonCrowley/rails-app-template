@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = File.expand_path('..', __dir__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+chdir APP_ROOT do
+  Dir.glob("#{APP_ROOT}/bin/*_post_setup").each do |file|
+    new_file = file.to_s.sub('_post_setup', '')
+    p "#{file} => #{new_file}"
+    if File.exist?(new_file)
+      File.delete(new_file)
+    end
+    txt = File.read(file)
+    File.open(new_file, 'w') {|f| f << txt}
+    File.delete(file)
+  end
+end

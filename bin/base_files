@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = File.expand_path('..', __dir__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+nm = false
+
+if ARGV[0]
+  class String
+    def underscore
+      self.gsub(/::/, '/').
+      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+      gsub(/([a-z\d])([A-Z])/,'\1_\2').
+      tr("-", "_").
+      downcase
+    end
+  end
+  nm = "#{ARGV[0]}"
+  raise ArgumentError.new(:invalid_app_name) unless nm.length > 2 && (nm =~ /\A([A-Z][a-z]+)+/)
+end
+
+chdir APP_ROOT do
+  if nm
+    Dir.glob("#{APP_ROOT}/{config,test,client,app}/**/{.*,*}.{html*,js,json,jsx,rb,yml}").each do |file|
+      unless File.directory?(file) || (file =~ /\.(br|g?z)(otli|ip)?$/)
+        txt = File.read(file)
+        txt = txt.gsub(/DefaultAppName/, nm).gsub(/default_app_name/, nm.underscore)
+        File.open(file, 'w') {|f| f << txt}
+      end
+    end
+  end
+  Dir.glob("#{APP_ROOT}/{config,test,client}/**/{.*,*}.base").each do |file|
+    new_file = file.to_s.sub('.base', '')
+    unless File.exist?(new_file)
+      p "#{file} => #{new_file}"
+      unless File.directory?(file)
+        txt = File.read(file)
+        txt = txt.gsub(/DefaultAppName/, nm).gsub(/default_app_name/, nm.underscore) if nm
+        File.open(new_file, 'w') {|f| f << txt}
+      else
+        File.rename(file, new_file)
+      end
+    end
+  end
+end

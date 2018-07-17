@@ -13,12 +13,8 @@ chdir APP_ROOT do
   # This script is a starting point to setup your application.
   # Add necessary setup steps to this file.
   recreate_db = false
-  
   if ARGV[0]
     recreate_db = true
-    puts "== Naming Application #{ARGV[0]} ==\n"
-    system! "bin/base_files #{ARGV[0]}"
-  else
     system! 'bin/base_files'
   end
 
