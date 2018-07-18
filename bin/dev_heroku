@@ -4,6 +4,8 @@ git checkout -b temp
 
 bin/dev_setup
 
+heroku pg:reset --confirm rails-app-template
+
 mv config/credentials.sample.yml.enc config/credentials.yml.enc
 git add -A
 git commit -am "push to heroku"

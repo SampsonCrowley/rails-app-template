@@ -18,6 +18,7 @@ chdir APP_ROOT do
     end
     txt = File.read(file)
     File.open(new_file, 'w') {|f| f << txt}
+    system! "chmod +x #{new_file}"
     File.delete(file)
   end
 end
