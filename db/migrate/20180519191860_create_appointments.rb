@@ -4,10 +4,12 @@ class CreateAppointments < ActiveRecord::Migration[5.2]
       t.references :client, foreign_key: true
       t.text :title
       t.text :description
-      t.datetime :starting
-      t.datetime :ending
+      t.datetime :starting, index: true
+      t.datetime :ending, index: true
 
-      t.timestamps
+      t.timestamps default: -> { 'NOW()' }
     end
+
+    audit_table :appointments
   end
 end

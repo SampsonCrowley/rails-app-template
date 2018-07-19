@@ -3,10 +3,12 @@ class CreateTasks < ActiveRecord::Migration[5.2]
     create_table :tasks do |t|
       t.string :title, null: false
       t.string :description
-      t.date :due_date
-      t.references :developer, foreign_key: true
+      t.date :due_date, index: true
+      t.references :developer, index: true, foreign_key: true
 
       t.timestamps default: -> { 'NOW()' }
     end
+
+    audit_table :tasks
   end
 end

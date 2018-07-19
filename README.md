@@ -9,5 +9,6 @@
 
 * rails credentials:edit
 * bin/setup `AppNameInCamelCase`
+* bin/post_setup
 
 ### to start the app in development: `./dev-servers`

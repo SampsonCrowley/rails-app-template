@@ -22,5 +22,8 @@ class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
 
       t.index [ :record_type, :record_id, :name, :blob_id ], name: "index_active_storage_attachments_uniqueness", unique: true
     end
+
+    audit_table :active_storage_attachments
+    audit_table :active_storage_blobs
   end
 end

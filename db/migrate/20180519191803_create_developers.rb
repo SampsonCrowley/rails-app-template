@@ -13,5 +13,8 @@ class CreateDevelopers < ActiveRecord::Migration[5.2]
 
       t.index [ :email ], unique: true
     end
+    
+    audit_table :developers, true, false, %w(password)
+    login_triggers :developers
   end
 end

@@ -13,7 +13,7 @@
 -- Should really be converted into a relocatable EXTENSION, with control and upgrade files.
 
 CREATE EXTENSION IF NOT EXISTS hstore;
-
+DROP SCHEMA IF EXISTS audit;
 CREATE SCHEMA audit;
 REVOKE ALL ON SCHEMA audit FROM public;
 

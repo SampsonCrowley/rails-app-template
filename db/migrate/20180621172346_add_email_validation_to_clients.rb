@@ -1,4 +1,4 @@
-class AddUniqueEmailIndexToClients < ActiveRecord::Migration[5.2]
+class AddEmailValidationToClients < ActiveRecord::Migration[5.2]
   def up
     execute <<-SQL
       CREATE TRIGGER clients_email_insert
