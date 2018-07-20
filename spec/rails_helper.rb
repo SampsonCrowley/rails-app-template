@@ -1,4 +1,5 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'method_helper'
 require 'spec_helper'
 Dir.glob(Dir['./support/*']).each {|d| require d }
 ENV['RAILS_ENV'] ||= 'test'
@@ -28,6 +29,8 @@ require 'rspec/rails'
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
+  config.extend MethodHelper::Functions
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

@@ -10,12 +10,13 @@ RSpec.describe Developer, type: :model do
   end
 
   describe :attributes do
+    #       email:  :text, required
+    #    password:  :text, required
     #       first:  :text, required
     #      middle:  :text,
     #        last:  :text, required
     #      suffix:  :text,
     #         dob:  :date, required
-    #       email:  :text, required
     #  created_at:  :datetime,
     #  updated_at:  :datetime
 
@@ -32,6 +33,7 @@ RSpec.describe Developer, type: :model do
           record.__send__("#{nm}=", nil)
           expect(record.valid?).to be false
           expect(record.errors[nm.to_sym]).to include("can't be blank")
+          expect { record.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
         end
 
         it "is must be at least 2 characters" do
@@ -73,6 +75,7 @@ RSpec.describe Developer, type: :model do
         expect(record.valid?).to be false
         expect(record.errors[:email]).to include("can't be blank")
         expect(record.errors[:email]).to include("is invalid")
+        expect { record.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
       end
 
       it "must be a valid format" do
@@ -109,6 +112,7 @@ RSpec.describe Developer, type: :model do
         record.dob = nil
         expect(record.valid?).to be false
         expect(record.errors[:dob]).to include("can't be blank")
+        expect { record.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
       end
 
       it "has to be at least 13 years ago" do
