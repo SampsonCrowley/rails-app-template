@@ -16,3 +16,5 @@ bin/reset
 git stash
 git checkout master
 git branch -D temp
+
+heroku run rails db:seed

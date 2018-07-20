@@ -21,4 +21,12 @@ chdir APP_ROOT do
     system! "chmod +x #{new_file}"
     File.delete(file)
   end
+
+  txt = ''
+  seed_file = File.new("#{APP_ROOT}/db/seeds/production.rb", "r")
+  while (line = seed_file.gets)
+    txt << ((line.strip =~ /^\#/) ? line : "\##{line}")
+  end
+  seed_file.close
+  File.open("#{APP_ROOT}/db/seeds/production.rb", 'w') {|f| f << txt}
 end

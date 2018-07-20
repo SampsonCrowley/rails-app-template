@@ -6,6 +6,7 @@ class Client < ApplicationRecord
   # == Extensions ===========================================================
 
   # == Relationships ========================================================
+  has_many :appointments, inverse_of: :client
 
   # == Validations ==========================================================
 
