@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-dev = Developer.create!(email: 'sampsonsprojects@gmail.com', password: 'asdfasdf', first: 'Sampson', middle: 'Robert', last: 'Crowley', dob: 20.years.ago)
+dev = Developer.create!(email: 'sampsonsprojects@gmail.com', new_password: 'asdfasdf', new_password_confirmation: 'asdfasdf', first: 'Sampson', middle: 'Robert', last: 'Crowley', dob: 20.years.ago)
 
 5.times do |i|
   dev.tasks << Task.new(

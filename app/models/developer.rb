@@ -11,7 +11,10 @@ class Developer < ApplicationRecord
   #       email:  :text, required
   #  created_at:  :datetime,
   #  updated_at:  :datetime
+
   attribute :new_avatar, :boolean
+  attribute :new_password, :text
+  attribute :new_password_confirmation, :text
 
   # == Extensions ===========================================================
 
@@ -32,6 +35,8 @@ class Developer < ApplicationRecord
 
   validate :avatar, :valid_image
 
+  validate :new_password, :require_password_confirmation, if: :new_password?
+
   # == Scopes ===============================================================
 
   # == Callbacks ============================================================
@@ -40,13 +45,30 @@ class Developer < ApplicationRecord
   # == Class Methods ========================================================
 
   # == Instance Methods =====================================================
-
   def attach_avatar(file, options = {})
     avatar.attach(file, **options)
     __send__ :valid_image
   end
 
   private
+    def password
+      self[:password]
+    end
+
+    def password=(val)
+      write_attribute :password, val
+    end
+
+    def require_password_confirmation
+      if new_password.present?
+        if new_password != new_password_confirmation
+          errors.add(:new_password, 'Password does not match confirmation')
+        else
+          self.password = new_password
+        end
+      end
+    end
+
     def older_than_12
       if dob > 13.years.ago.to_date
         errors.add(:dob, 'You must be at least 13 years old to use this app')

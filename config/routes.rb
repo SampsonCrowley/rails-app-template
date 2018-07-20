@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :appointments
-    resources :developers
     resources :tasks
+    resources :developers
   end
 
   get '*path', to: "application#serve_asset", constraints: ->(request) do

@@ -72,7 +72,7 @@ RSpec.describe API::TasksController, type: :controller do
     context "with valid params" do
       let(:second_dev) {
         dev = build(:developer)
-        dev.email = "new_email_#{Time.now.to_s}@test.test"
+        dev.email = "new_email_#{Time.now.to_s.gsub(' ', '_')}@test.test"
         dev.save
         dev
       }

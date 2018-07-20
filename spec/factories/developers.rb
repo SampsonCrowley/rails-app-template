@@ -4,6 +4,8 @@ FactoryBot.define do
   end
   factory :developer do
     email
+    new_password 'asdfasdf'
+    new_password_confirmation 'asdfasdf'
     first "MyString"
     middle "MyString"
     last "MyString"

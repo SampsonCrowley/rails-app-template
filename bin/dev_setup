@@ -11,4 +11,5 @@ end
 
 chdir APP_ROOT do
   system! 'bin/setup DefaultAppName'
+  system! 'RAILS_ENV=test bin/rails db:migrate'
 end

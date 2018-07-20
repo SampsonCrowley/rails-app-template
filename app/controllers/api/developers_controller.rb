@@ -47,6 +47,6 @@ class API::DevelopersController < API::ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def developer_params
-      params.require(:developer).permit(:email, :first, :middle, :last, :suffix, :dob)
+      params.require(:developer).permit(:email, :new_password, :new_password_confirmation, :first, :middle, :last, :suffix, :dob)
     end
 end

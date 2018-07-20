@@ -25,21 +25,8 @@ require 'rspec/rails'
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
-begin
-  ActiveRecord::Migration.maintain_test_schema!
-rescue ActiveRecord::PendingMigrationError
-  `RAILS_ENV=test rails db:migrate`
-rescue ActiveRecord::NoDatabaseError
-  `RAILS_ENV=test rails db:create db:migrate`
-rescue => e
-  puts e.inspect
-  raise Exception.new(:not_migrated)
-end
-
-ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
   config.include FactoryBot::Syntax::Methods
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -69,3 +56,5 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+ActiveRecord::Migration.maintain_test_schema!

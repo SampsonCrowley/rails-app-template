@@ -13,6 +13,8 @@ RSpec.describe API::DevelopersController, type: :controller do
       suffix: 'where',
       dob: 13.years.ago,
       email: 'sample@sample.sample.sample-sample.sample',
+      new_password: 'asdfasdf',
+      new_password_confirmation: 'asdfasdf'
     }
   }
 
@@ -21,6 +23,7 @@ RSpec.describe API::DevelopersController, type: :controller do
       first: 's',
       dob: 12.years.ago,
       email: 'sample@sample',
+      new_password: 'asdfasdf'
     }
   }
 
