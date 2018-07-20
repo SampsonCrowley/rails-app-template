@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "license": "MIT",
   "engines": {
-    "node": "10.1.0",
-    "yarn": "1.7.0"
+    "node": ">=10.1.0",
+    "yarn": ">=1.7.0"
   },
   "scripts": {
     "build": "yarn compile && yarn deploy && yarn routes && rm public/index.htm*",
-    "compile": "yarn --cwd client install && yarn --cwd client build",
+    "compile": "yarn --cwd client install --verbose && yarn --cwd client build",
     "routes": "cp -a client/src/routes/routes.json public/routes.json",
     "deploy": "echo 'HELLO' && rm -rf public/static/* && cp -a client/build/. public/",
     "heroku-postbuild": "yarn build"
