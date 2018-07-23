@@ -1,41 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Developer, type: :model do
-  let(:factory_dev) do
-    build(:developer)
-  end
-
-  it "has a valid factory" do
-    expect(factory_dev.valid?).to be true
-  end
+  has_valid_factory(:developer)
 
   describe :attributes do
-    #       email:  :text, required
-    #    password:  :text, required
     #       first:  :text, required
     #      middle:  :text,
     #        last:  :text, required
     #      suffix:  :text,
     #         dob:  :date, required
+    #       email:  :text, required
     #  created_at:  :datetime,
     #  updated_at:  :datetime
 
-    %w(
-      first
-      last
-    ).each do |nm|
-      describe nm do
-        let(:record) do
-          factory_dev.dup
-        end
-
-        it "is required" do
-          record.__send__("#{nm}=", nil)
-          expect(record.valid?).to be false
-          expect(record.errors[nm.to_sym]).to include("can't be blank")
-          expect { record.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
-        end
-
+    [ :first, :last ].each do |nm|
+      required_column(:developer, nm) do
         it "is must be at least 2 characters" do
           record.__send__("#{nm}=", 'a')
           expect(record.valid?).to be false
@@ -54,7 +33,7 @@ RSpec.describe Developer, type: :model do
     ).each do |nm|
       describe nm do
         let(:record) do
-          factory_dev.dup
+          build(:developer)
         end
 
         it "is optional" do
@@ -65,19 +44,7 @@ RSpec.describe Developer, type: :model do
       end
     end
 
-    describe :email do
-      let(:record) do
-        record = factory_dev.dup
-      end
-
-      it "is required" do
-        record.email = nil
-        expect(record.valid?).to be false
-        expect(record.errors[:email]).to include("can't be blank")
-        expect(record.errors[:email]).to include("is invalid")
-        expect { record.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
-      end
-
+    required_column(:developer, :email, true) do
       it "must be a valid format" do
         record.email = 'sample@sample'
         expect(record.valid?).to be false
@@ -103,18 +70,7 @@ RSpec.describe Developer, type: :model do
       end
     end
 
-    describe :dob do
-      let(:record) do
-        record = factory_dev.dup
-      end
-
-      it "is required" do
-        record.dob = nil
-        expect(record.valid?).to be false
-        expect(record.errors[:dob]).to include("can't be blank")
-        expect { record.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
-      end
-
+    required_column(:developer, :dob) do
       it "has to be at least 13 years ago" do
         record.dob = 13.years.ago.to_date + 1.day
         expect(record.valid?).to be false
