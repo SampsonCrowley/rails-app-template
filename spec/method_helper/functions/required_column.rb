@@ -1,7 +1,7 @@
 module MethodHelper
   module Functions
     def required_column(factory_name, column_name, unique = false, &blk)
-      describe column_name do
+      describe column_name.to_s do
         let(:record) { build(factory_name) }
 
         it "is required" do

@@ -8,7 +8,7 @@ class CreateClients < ActiveRecord::Migration[5.2]
       t.text :phone_type
 
       t.index [ :email, :phone ], unique: true
-      
+
       t.timestamps default: -> { 'NOW()' }
     end
 

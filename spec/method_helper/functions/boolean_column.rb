@@ -1,7 +1,7 @@
 module MethodHelper
   module Functions
     def boolean_column(factory_name, column_name, default_val = false)
-      describe column_name do
+      describe column_name.to_s do
         let(:record) { build(factory_name) }
 
         it "cannot be nil in the database" do

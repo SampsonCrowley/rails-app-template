@@ -21,6 +21,22 @@ class ApplicationRecord < ActiveRecord::Base
     []
   end
 
+  def self.column_comments(prefix = '')
+    longest_name = 0
+    column_names.each {|nm| longest_name = nm.length if nm.length > longest_name}
+    longest_name += 1
+    str = ''
+    columns.each do |col|
+      unless col.name == 'id'
+        spaces = "#{' ' * (longest_name - col.name.length)}"
+        is_required = "#{col.null == false ? ', required' : ''}"
+        is_default = "#{col.default ? ", default: #{col.default}" : ''}"
+        str << "#{prefix}##{spaces}#{col.name}: :#{col.type}#{is_required}\n"
+      end
+    end
+    str
+  end
+
   def self.default_print
     column_names
   end

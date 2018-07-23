@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe Task, type: :model do
   has_valid_factory(:task)
 
-  describe :attributes do
-    #        :title => :string,
-    #  :description => :string,
-    #     :due_date => :date,
-    # :developer_id => :integer,
-    #   :created_at => :datetime,
-    #   :updated_at => :datetime
+  describe 'Attributes' do
+    #        title: :string, required
+    #  description: :string
+    #     due_date: :date
+    # developer_id: :integer
+    #   created_at: :datetime, required
+    #   updated_at: :datetime, required
 
     required_column(:task, :title) do
       it "must be at least 5 characters" do
@@ -38,7 +38,7 @@ RSpec.describe Task, type: :model do
     end
   end
 
-  describe :associations do
+  describe 'Associations' do
     it "belongs to a developer" do
       t = Task.reflect_on_association(:developer)
       expect(t.options[:inverse_of]).to eq(:tasks)

@@ -3,15 +3,16 @@ require 'rails_helper'
 RSpec.describe Developer, type: :model do
   has_valid_factory(:developer)
 
-  describe :attributes do
-    #       first:  :text, required
-    #      middle:  :text,
-    #        last:  :text, required
-    #      suffix:  :text,
-    #         dob:  :date, required
-    #       email:  :text, required
-    #  created_at:  :datetime,
-    #  updated_at:  :datetime
+  describe 'Attributes' do
+    #      email: :string, required
+    #   password: :text, required
+    #      first: :string, required
+    #     middle: :string
+    #       last: :string, required
+    #     suffix: :string
+    #        dob: :date, required
+    # created_at: :datetime, required
+    # updated_at: :datetime, required
 
     [ :first, :last ].each do |nm|
       required_column(:developer, nm) do
@@ -149,7 +150,7 @@ RSpec.describe Developer, type: :model do
 
   end
 
-  describe :associations do
+  describe 'Associations' do
     it "has many tasks" do
       t = Developer.reflect_on_association(:tasks)
       expect(t.options[:inverse_of]).to eq(:developer)
