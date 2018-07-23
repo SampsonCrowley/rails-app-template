@@ -23,29 +23,9 @@ RSpec.describe Task, type: :model do
       end
     end
 
-    describe :description do
-      let(:record) do
-        build(:task)
-      end
+    optional_column(:task, :description)
 
-      it "is optional" do
-        record.description = nil
-        expect(record.valid?).to be true
-        expect(record.errors[:description]).to be_empty
-      end
-    end
-
-    describe :due_date do
-      let(:record) do
-        build(:task)
-      end
-
-      it "is optional" do
-        record.due_date = nil
-        expect(record.valid?).to be true
-        expect(record.errors[:due_date]).to be_empty
-      end
-
+    optional_column(:task, :due_date) do
       it "cannot be in the past" do
         record.due_date = Date.today
         expect(record.valid?).to be true
@@ -56,7 +36,6 @@ RSpec.describe Task, type: :model do
         expect(record.errors[:due_date]).to include('cannot be in the past')
       end
     end
-
   end
 
   describe :associations do

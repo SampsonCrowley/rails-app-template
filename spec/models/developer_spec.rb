@@ -27,21 +27,8 @@ RSpec.describe Developer, type: :model do
       end
     end
 
-    %w(
-      middle
-      suffix
-    ).each do |nm|
-      describe nm do
-        let(:record) do
-          build(:developer)
-        end
-
-        it "is optional" do
-          record.__send__("#{nm}=", nil)
-          expect(record.valid?).to be true
-          expect(record.errors[nm.to_sym]).to be_empty
-        end
-      end
+    [ :middle, :suffix ].each do |nm|
+      optional_column(:developer, nm)
     end
 
     required_column(:developer, :email, true) do
