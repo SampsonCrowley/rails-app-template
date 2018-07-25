@@ -8,6 +8,13 @@ class ApplicationRecord < ActiveRecord::Base
   # == Extensions ===========================================================
 
   # == Relationships ========================================================
+  has_many :audits,
+    class_name: 'ApplicationInfo::Audit',
+    primary_type: :table_name,
+    foreign_key: :row_id,
+    foreign_type: :table_name,
+    as: :audits
+
 
   # == Validations ==========================================================
   before_validation :set_booleans
@@ -57,6 +64,22 @@ class ApplicationRecord < ActiveRecord::Base
   def self.queue_adapter_inline?
     @@queue_adapter ||= Rails.application.config.active_job.queue_adapter
     @@queue_adapter == :inline
+  end
+
+  def self.table_name_has_schema?
+    @@table_name_has_schema ||= (table_name =~ /\w+\.\w+/)
+  end
+
+  def self.table_name_without_schema
+    @@table_name_without_schema ||= (table_name =~ /\w+\.\w+/) ? table_name.split('.').last : table_name
+  end
+
+  def self.table_schema
+    @@table_schema ||= table_name_has_schema? ? table_name.split('.').first : 'public'
+  end
+
+  def self.table_size
+    ApplicationInfo::TableSize.unscoped.find_by(name: table_name_without_schema, schema: table_schema)
   end
 
   def self.transaction(*args)
@@ -109,6 +132,18 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   private
+    # def table_name_has_schema?
+    #   self.class.table_name_has_schema?
+    # end
+    #
+    # def table_schema
+    #   self.class.table_schema
+    # end
+    #
+    # def table_name_without_schema
+    #   self.class.table_name_without_schema
+    # end
+
     def set_booleans
       self.class.boolean_columns.each do |nm|
         self.__send__("#{nm}=", __send__("#{nm}=", !!Boolean.parse(__send__ nm)))

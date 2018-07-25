@@ -134,7 +134,9 @@ $$
     IF ((TG_ARGV[1] IS NOT NULL) AND (TG_LEVEL = 'ROW')) THEN
       pk_val_query = 'SELECT $1.' || quote_ident(TG_ARGV[1]::text);
 
-      EXECUTE pk_val_query INTO audit_row.row_id USING NEW;
+      IF (TG_OP IS DISTINCT FROM 'DELETE') THEN
+        EXECUTE pk_val_query INTO audit_row.row_id USING NEW;
+      END IF;
 
       IF audit_row.row_id IS NULL THEN
         EXECUTE pk_val_query INTO audit_row.row_id USING OLD;
