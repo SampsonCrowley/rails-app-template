@@ -21,12 +21,12 @@ module DefaultAppName
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    config.eager_load_paths += Dir["#{config.root}/lib/modules/**/"]
+    config.active_record.schema_format = :sql
     # config.time_zone = 'Mountain Time (US & Canada)'
     config.active_record.default_timezone = :utc
-    config.eager_load_paths += Dir["#{config.root}/lib/modules/**/"]
     # uncomment line below to split routes into multiple files
     # config.autoload_paths += %W(#{config.root}/config/routes)
-    config.active_record.schema_format = :sql
     config.active_job.queue_adapter = :sidekiq
     config.generators do |g|
       g.assets false
