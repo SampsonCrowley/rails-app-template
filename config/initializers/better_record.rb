@@ -23,7 +23,7 @@ module BetterRecord
   # uncomment the following line to add an association for table audits
   # directly to ActiveRecord::Base. DEFAULT - false
 
-  self.has_audits_by_default = true
+  self.has_auditing_relation_by_default = true
 
   # uncomment the following line to change the association name for
   # auditing lookups. DEFAULT - :audits
