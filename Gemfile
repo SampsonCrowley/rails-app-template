@@ -5,7 +5,7 @@ ruby '2.5.1'
 
 # envkey managed environment variables
 # gem 'envkey'
-gem 'better_record', '~> 0.7', '>= 0.7.4'
+gem 'better_record', '~> 0.7', '>= 0.7.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
