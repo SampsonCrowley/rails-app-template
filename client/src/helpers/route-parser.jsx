@@ -5,35 +5,46 @@ class RouteParser {
   constructor() {
     this.routes = Routes.links || {}
     this.current = this.routes.root
+    this.routeCache = {}
   }
 
   async setPath(location){
-    const path = location.pathname.slice(1, location.pathname.length).split("/")[0]
+    const fullPath = location.pathname.slice(1, location.pathname.length),
+          path = fullPath.split("/")[0]
 
     this.title = null
 
-    this.current = this.routes[path] || this.routes.root
+    this.current = this.routes[path] || (!path ? this.routes.root : this.routes.fourOhFour)
+
     if(this.current.alias) this.current = this.routes[this.current.to] || this.routes.root
-    if(this.current.resource) {
-      const regex = new RegExp(path + "/(.*?)(\\/|\\?|$)"),
-            matches = location.pathname.match(regex);
 
-      let id = (matches ? matches[1] : null);
+    if(this.current.cache && this.routeCache[fullPath]) {
+      this.title = this.routeCache[fullPath]
+    } else if(this.current.resource) {
+      try {
+        const regex = new RegExp(path + "/(.*?)(\\/|\\?|$)"),
+              matches = location.pathname.match(regex);
 
-      console.log(regex, id, location.pathname.match(regex))
+        let id = (matches ? matches[1] : null);
 
-      if(this.current.api && id){
-        if((`${id}`.toLowerCase() === 'new')) {
-          id = 'New'
-        } else {
-          const result = await fetch(this.current.api + id),
-                resource = await result.json()
-          id = resource[this.current.method || 'title']
+        // console.log(regex, id, location.pathname.match(regex))
+
+        if(this.current.api && id){
+          if((`${id}`.toLowerCase() === 'new')) {
+            id = 'New'
+          } else {
+            const result = await fetch(this.current.api + id),
+                  resource = await result.json()
+            id = resource[this.current.method || 'title']
+          }
         }
-      }
-      id = id || 'Index'
+        id = id || 'Index'
+        this.title = this.current.title.replace(/%RESOURCE%/, id)
 
-      this.title = this.current.title.replace(/%RESOURCE%/, id)
+        if(this.current.cache) this.routeCache[fullPath] = this.title
+      } catch (e) {
+        this.title = this.current.title.replace(/%RESOURCE%/, 'Not Found')
+      }
     }
 
     this.title = this.title || this.current.title

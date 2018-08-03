@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :appointments
     resources :tasks
     resources :developers
+    resources :states, only: [:index]
   end
 
   get '*path', to: "application#serve_asset", constraints: ->(request) do

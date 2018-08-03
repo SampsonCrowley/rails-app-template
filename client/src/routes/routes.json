@@ -48,6 +48,12 @@
     "alternate": {
       "alias": true,
       "to": "page"
+    },
+    "fourOhFour": {
+      "title": "Page Not Found",
+      "description": "DefaultAppName: Unknown Route",
+      "image": "logo.svg",
+      "index": true
     }
   }
 }
